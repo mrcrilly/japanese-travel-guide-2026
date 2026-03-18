@@ -568,10 +568,10 @@
                 <article class="source-card" id="{{ citation.id }}">
                   <p class="source-id">{{ citation.id }}</p>
                   <h3>{{ citation.title }}</h3>
-                  <p>{{ citation.publisher }}</p>
-                  <p><a href="{{ citation.url }}">{{ citation.url }}</a></p>
-                  <p>Accessed {{ citation.accessed }}</p>
-                  <p>{{ citation.note }}</p>
+                  <p class="source-meta">{{ citation.publisher }}</p>
+                  <p class="source-link-wrap"><a class="source-link" href="{{ citation.url }}">{{ citation.url }}</a></p>
+                  <p class="source-meta">Accessed {{ citation.accessed }}</p>
+                  <p class="source-note">{{ citation.note }}</p>
                 </article>
                 {% endfor %}
               </div>

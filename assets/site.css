@@ -414,6 +414,38 @@ tbody tr:last-child td {
   padding: 20px;
 }
 
+.source-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.source-card h3,
+.source-card p {
+  min-width: 0;
+  margin: 0;
+}
+
+.source-meta {
+  font-size: 0.92rem;
+}
+
+.source-link-wrap {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.source-link {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.source-note {
+  line-height: 1.6;
+}
+
 .bullet-list {
   margin: 14px 0 0;
   padding-left: 20px;
@@ -503,6 +535,16 @@ tbody tr:last-child td {
   .table-card {
     overflow-x: visible;
     padding: 8px;
+  }
+
+  .source-card {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .source-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.2;
   }
 
   .tab-nav {
