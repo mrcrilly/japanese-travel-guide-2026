@@ -53,6 +53,14 @@ def sgd_to_aud(value: int | float | tuple[int | float, int | float]) -> str:
     return aud_amount(value * SGD_TO_AUD)
 
 
+def vocab_item(japanese: str, romaji: str, meaning: str) -> dict[str, str]:
+    return {"japanese": japanese, "romaji": romaji, "meaning": meaning}
+
+
+def phrase_line(japanese: str, romaji: str, english: str) -> dict[str, str]:
+    return {"japanese": japanese, "romaji": romaji, "english": english}
+
+
 def family_cost(value: int | tuple[int, int], family_size: int = 4) -> int | tuple[int, int]:
     if isinstance(value, tuple):
         return value[0] * family_size, value[1] * family_size
@@ -411,6 +419,22 @@ def build_data() -> dict:
             "url": "https://www.wego.com/schedules/sin/tyo/flight-schedules-from-singapore-to-tokyo",
             "accessed": "2026-03-18",
             "note": "Used for Singapore-Tokyo flight-time estimates.",
+        },
+        {
+            "id": "S48",
+            "title": "Polish Up Your Japanese",
+            "publisher": "Japan National Tourism Organization",
+            "url": "https://www.japan.travel/en/story/polish-up-your-japanese/",
+            "accessed": "2026-03-18",
+            "note": "Official travel-Japanese phrases used as an anchor for practical shopping and question forms in the language-practice tab.",
+        },
+        {
+            "id": "S49",
+            "title": "Traveling Mindfully",
+            "publisher": "Japan National Tourism Organization",
+            "url": "https://www.japan.travel/en/responsible-travel-guide/traveling-mindfully/",
+            "accessed": "2026-03-18",
+            "note": "Official etiquette guidance used for the language tab's courtesy notes about volume, photos, and considerate behavior.",
         },
     ]
 
@@ -1123,6 +1147,434 @@ def build_data() -> dict:
         },
     ]
 
+    language_core_rows = [
+        {
+            "topic": "Getting attention politely",
+            "best_use": "Any counter, station window, or shop when you need to start a conversation without sounding abrupt.",
+            "words": [
+                vocab_item("すみません", "sumimasen", "excuse me / sorry / can I ask"),
+                vocab_item("お願いします", "onegaishimasu", "please"),
+                vocab_item("ありがとうございます", "arigatou gozaimasu", "thank you"),
+            ],
+            "try_line": phrase_line(
+                "すみません、ちょっといいですか。",
+                "Sumimasen, chotto ii desu ka.",
+                "Excuse me, do you have a moment?",
+            ),
+            "likely_reply": phrase_line(
+                "はい、どうぞ。",
+                "Hai, douzo.",
+                "Yes, go ahead.",
+            ),
+            "note": "This is the safest opener in the whole trip. Use it constantly.",
+            "source_ids": ["S48", "S49"],
+        },
+        {
+            "topic": "Asking for a recommendation",
+            "best_use": "Restaurants, market stalls, bakeries, snack shops, and sake counters.",
+            "words": [
+                vocab_item("おすすめ", "osusume", "recommendation"),
+                vocab_item("人気", "ninki", "popular"),
+                vocab_item("どれ", "dore", "which one"),
+            ],
+            "try_line": phrase_line(
+                "おすすめは何ですか。",
+                "Osusume wa nan desu ka.",
+                "What do you recommend?",
+            ),
+            "likely_reply": phrase_line(
+                "こちらが人気です。",
+                "Kochira ga ninki desu.",
+                "This one is popular.",
+            ),
+            "note": "A short question like this gets you into a real exchange fast.",
+            "source_ids": ["S48"],
+        },
+        {
+            "topic": "Price, quantity, and colors",
+            "best_use": "Nippori Fabric Town, markets, souvenir shops, and antiques.",
+            "words": [
+                vocab_item("いくら", "ikura", "how much"),
+                vocab_item("ひとつ", "hitotsu", "one"),
+                vocab_item("二メートル", "ni meetoru", "two meters"),
+                vocab_item("色", "iro", "color"),
+            ],
+            "try_line": phrase_line(
+                "いくらですか。ほかの色はありますか。",
+                "Ikura desu ka. Hoka no iro wa arimasu ka.",
+                "How much is it? Do you have another color?",
+            ),
+            "likely_reply": phrase_line(
+                "はい、青とベージュがあります。",
+                "Hai, ao to beeju ga arimasu.",
+                "Yes, we have blue and beige.",
+            ),
+            "note": "This one is especially useful for fabric, craft, and flea-market shopping.",
+            "source_ids": ["S48"],
+        },
+        {
+            "topic": "Finding things and asking directions",
+            "best_use": "Stations, museums, markets, department stores, and temple areas.",
+            "words": [
+                vocab_item("どこ", "doko", "where"),
+                vocab_item("駅", "eki", "station"),
+                vocab_item("入口", "iriguchi", "entrance"),
+                vocab_item("トイレ", "toire", "toilet"),
+            ],
+            "try_line": phrase_line(
+                "トイレはどこですか。",
+                "Toire wa doko desu ka.",
+                "Where is the toilet?",
+            ),
+            "likely_reply": phrase_line(
+                "あちらです。",
+                "Achira desu.",
+                "It's over there.",
+            ),
+            "note": "Simple location questions are high-frequency and easy to say clearly.",
+            "source_ids": ["S48"],
+        },
+        {
+            "topic": "Slowing the conversation down",
+            "best_use": "Any time someone answers too fast and you want to keep the exchange going instead of switching to English.",
+            "words": [
+                vocab_item("もう一度", "mou ichido", "one more time"),
+                vocab_item("ゆっくり", "yukkuri", "slowly"),
+                vocab_item("わかりました", "wakarimashita", "I understood"),
+            ],
+            "try_line": phrase_line(
+                "すみません、もう一度ゆっくりお願いします。",
+                "Sumimasen, mou ichido yukkuri onegaishimasu.",
+                "Sorry, one more time slowly, please.",
+            ),
+            "likely_reply": phrase_line(
+                "はい、わかりました。",
+                "Hai, wakarimashita.",
+                "Yes, understood.",
+            ),
+            "note": "This keeps the interaction in Japanese without pretending you caught everything.",
+            "source_ids": ["S48", "S49"],
+        },
+    ]
+
+    language_ideas_rows = [
+        {
+            "stop": "Tokyo first stay",
+            "date_window": "Oct 28-Oct 31",
+            "place": "Hotel check-in or bag drop around central Tokyo",
+            "situation": "Use your first Japanese interaction on something predictable and low-pressure.",
+            "goal": "Say your name, mention the reservation, and ask about leaving bags.",
+            "words": [
+                vocab_item("予約", "yoyaku", "reservation"),
+                vocab_item("荷物", "nimotsu", "luggage"),
+                vocab_item("先に", "saki ni", "in advance / first"),
+                vocab_item("預ける", "azukeru", "to leave in someone's care"),
+            ],
+            "starter": phrase_line(
+                "予約しています。マクリリーです。",
+                "Yoyaku shite imasu. Makuririi desu.",
+                "I have a reservation. My name is McReilly.",
+            ),
+            "likely_reply": phrase_line(
+                "ありがとうございます。パスポートをお願いします。",
+                "Arigatou gozaimasu. Pasupooto o onegaishimasu.",
+                "Thank you. Your passports, please.",
+            ),
+            "your_answer": phrase_line(
+                "はい、どうぞ。荷物を先に預けてもいいですか。",
+                "Hai, douzo. Nimotsu o saki ni azukete mo ii desu ka.",
+                "Sure. Is it okay if we leave our bags first?",
+            ),
+            "stretch_line": phrase_line(
+                "チェックインは何時からですか。",
+                "Chekkuin wa nanji kara desu ka.",
+                "What time is check-in from?",
+            ),
+            "note": "A good first win because the staff will expect this conversation and usually speak clearly.",
+            "source_ids": ["S48", "S49"],
+        },
+        {
+            "stop": "Tokyo first stay",
+            "date_window": "Oct 29-Oct 31",
+            "place": "Lunch counter in Asakusa or Ueno",
+            "situation": "Ask for the house favorite instead of pointing straight at the menu.",
+            "goal": "Practice recommendation language and one simple follow-up question.",
+            "words": [
+                vocab_item("おすすめ", "osusume", "recommendation"),
+                vocab_item("人気", "ninki", "popular"),
+                vocab_item("ひとつ", "hitotsu", "one"),
+                vocab_item("メニュー", "menyuu", "menu"),
+            ],
+            "starter": phrase_line(
+                "おすすめは何ですか。",
+                "Osusume wa nan desu ka.",
+                "What do you recommend?",
+            ),
+            "likely_reply": phrase_line(
+                "こちらの天ぷらそばが人気です。",
+                "Kochira no tempura soba ga ninki desu.",
+                "The tempura soba is popular.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、それをひとつお願いします。",
+                "Jaa, sore o hitotsu onegaishimasu.",
+                "Then I'll have one of those, please.",
+            ),
+            "stretch_line": phrase_line(
+                "英語のメニューはありますか。",
+                "Eigo no menyuu wa arimasu ka.",
+                "Do you have an English menu?",
+            ),
+            "note": "Perfect for day one or two because you only need to understand one short answer.",
+            "source_ids": ["S02", "S48"],
+        },
+        {
+            "stop": "Osaka",
+            "date_window": "Nov 2-Nov 4",
+            "place": "Dotonbori, Shinsekai, or before the Hungry Osaka food tour",
+            "situation": "Use Osaka as your food-conversation stop.",
+            "goal": "Ask what is popular and react to the answer instead of just ordering silently.",
+            "words": [
+                vocab_item("初めて", "hajimete", "first time"),
+                vocab_item("たこ焼き", "takoyaki", "octopus balls"),
+                vocab_item("串カツ", "kushikatsu", "fried skewers"),
+                vocab_item("あまり", "amari", "not very / not too much"),
+            ],
+            "starter": phrase_line(
+                "初めてなんですが、おすすめは何ですか。",
+                "Hajimete nan desu ga, osusume wa nan desu ka.",
+                "It's my first time here, what do you recommend?",
+            ),
+            "likely_reply": phrase_line(
+                "たこ焼きと串カツが人気です。",
+                "Takoyaki to kushikatsu ga ninki desu.",
+                "Takoyaki and kushikatsu are popular.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、たこ焼きをひとつお願いします。",
+                "Jaa, takoyaki o hitotsu onegaishimasu.",
+                "Then I'll have one takoyaki, please.",
+            ),
+            "stretch_line": phrase_line(
+                "あまり辛くないですか。",
+                "Amari karakunai desu ka.",
+                "It's not very spicy, right?",
+            ),
+            "note": "Food stalls reward short, direct Japanese more than long textbook sentences.",
+            "source_ids": ["S05", "S36", "S48"],
+        },
+        {
+            "stop": "Hiroshima",
+            "date_window": "Nov 5-Nov 7",
+            "place": "Okonomiyaki counter",
+            "situation": "Ask one question about the Hiroshima-style version and then place an order.",
+            "goal": "Get comfortable with one food-specific exchange.",
+            "words": [
+                vocab_item("お好み焼き", "okonomiyaki", "savory pancake"),
+                vocab_item("そば入り", "soba-iri", "with noodles"),
+                vocab_item("牡蠣", "kaki", "oysters"),
+                vocab_item("なし", "nashi", "without"),
+            ],
+            "starter": phrase_line(
+                "広島風お好み焼きはどれですか。",
+                "Hiroshima-fu okonomiyaki wa dore desu ka.",
+                "Which one is the Hiroshima-style okonomiyaki?",
+            ),
+            "likely_reply": phrase_line(
+                "こちらのそば入りです。牡蠣も入れられます。",
+                "Kochira no soba-iri desu. Kaki mo ireraremasu.",
+                "This one with noodles. You can add oysters too.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、そば入りをお願いします。牡蠣はなしで大丈夫です。",
+                "Jaa, soba-iri o onegaishimasu. Kaki wa nashi de daijoubu desu.",
+                "Then the one with noodles, please. No oysters is fine for us.",
+            ),
+            "stretch_line": phrase_line(
+                "家族で分けてもいいですか。",
+                "Kazoku de wakete mo ii desu ka.",
+                "Is it okay if we share it as a family?",
+            ),
+            "note": "Counter-style places are great because you can point, listen, and repeat.",
+            "source_ids": ["S09", "S48"],
+        },
+        {
+            "stop": "Kanazawa",
+            "date_window": "Nov 8-Nov 9",
+            "place": "Omicho Market seafood or produce stall",
+            "situation": "Ask what something is and whether it is seasonal.",
+            "goal": "Build confidence asking about food you do not recognize instantly.",
+            "words": [
+                vocab_item("旬", "shun", "in season"),
+                vocab_item("今", "ima", "now"),
+                vocab_item("これ", "kore", "this"),
+                vocab_item("いくら", "ikura", "how much"),
+            ],
+            "starter": phrase_line(
+                "これは何ですか。今が旬ですか。",
+                "Kore wa nan desu ka. Ima ga shun desu ka.",
+                "What is this? Is it in season now?",
+            ),
+            "likely_reply": phrase_line(
+                "のどぐろです。今の時期に人気です。",
+                "Nodoguro desu. Ima no jiki ni ninki desu.",
+                "It's blackthroat seaperch. It's popular this time of year.",
+            ),
+            "your_answer": phrase_line(
+                "おいしそうですね。ひとつお願いします。",
+                "Oishisou desu ne. Hitotsu onegaishimasu.",
+                "That looks delicious. One, please.",
+            ),
+            "stretch_line": phrase_line(
+                "持ち帰りできますか。",
+                "Mochikaeri dekimasu ka.",
+                "Can I take it away?",
+            ),
+            "note": "Markets are where curiosity pays off. Simple questions often get friendly answers.",
+            "source_ids": ["S11", "S48"],
+        },
+        {
+            "stop": "Takayama",
+            "date_window": "Nov 10-Nov 11",
+            "place": "Sake shop in the old town",
+            "situation": "Ask for a tasting and compare dry versus sweeter styles.",
+            "goal": "Practice preference language rather than only nouns.",
+            "words": [
+                vocab_item("試飲", "shiin", "tasting"),
+                vocab_item("甘い", "amai", "sweet"),
+                vocab_item("辛口", "karakuchi", "dry"),
+                vocab_item("小さい瓶", "chiisai bin", "small bottle"),
+            ],
+            "starter": phrase_line(
+                "少し試飲できますか。辛口が好きです。",
+                "Sukoshi shiin dekimasu ka. Karakuchi ga suki desu.",
+                "Can I taste a little? I like dry sake.",
+            ),
+            "likely_reply": phrase_line(
+                "はい、こちらは辛口で、こちらは少し甘めです。",
+                "Hai, kochira wa karakuchi de, kochira wa sukoshi amame desu.",
+                "Yes, this one is dry, and this one is a little sweeter.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、辛口を少しお願いします。",
+                "Jaa, karakuchi o sukoshi onegaishimasu.",
+                "Then a little of the dry one, please.",
+            ),
+            "stretch_line": phrase_line(
+                "お土産用に小さい瓶はありますか。",
+                "Omiyage-you ni chiisai bin wa arimasu ka.",
+                "Do you have a small bottle for a souvenir?",
+            ),
+            "note": "Takayama is ideal for slow, friendly practice because interactions are rarely rushed.",
+            "source_ids": ["S13", "S48"],
+        },
+        {
+            "stop": "Nagano",
+            "date_window": "Nov 12-Nov 13",
+            "place": "Zenkoji approach or a soba shop",
+            "situation": "Ask what the local specialty is, then order it.",
+            "goal": "Practice a natural one-two exchange you can reuse elsewhere.",
+            "words": [
+                vocab_item("名物", "meibutsu", "local specialty"),
+                vocab_item("信州そば", "Shinshu soba", "Nagano soba"),
+                vocab_item("温かい", "atatakai", "hot / warm"),
+                vocab_item("ありますか", "arimasu ka", "do you have"),
+            ],
+            "starter": phrase_line(
+                "このあたりの名物は何ですか。",
+                "Kono atari no meibutsu wa nan desu ka.",
+                "What is the local specialty around here?",
+            ),
+            "likely_reply": phrase_line(
+                "信州そばとりんごが有名です。",
+                "Shinshu soba to ringo ga yuumei desu.",
+                "Shinshu soba and apples are famous.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、温かいそばをお願いします。",
+                "Jaa, atatakai soba o onegaishimasu.",
+                "Then I'd like a hot soba, please.",
+            ),
+            "stretch_line": phrase_line(
+                "りんごジュースもありますか。",
+                "Ringo juusu mo arimasu ka.",
+                "Do you also have apple juice?",
+            ),
+            "note": "A very reusable pattern: ask the specialty, then order the specialty.",
+            "source_ids": ["S16", "S48"],
+        },
+        {
+            "stop": "Tokyo final stay",
+            "date_window": "Nov 14 or Nov 16",
+            "place": "Nippori Fabric Town",
+            "situation": "This is one of the cleanest places in the trip for practical shopping Japanese.",
+            "goal": "Ask for fabric by length and check for another color or pattern.",
+            "words": [
+                vocab_item("布", "nuno", "fabric"),
+                vocab_item("二メートル", "ni meetoru", "two meters"),
+                vocab_item("柄", "gara", "pattern"),
+                vocab_item("切ってください", "kitte kudasai", "please cut it"),
+            ],
+            "starter": phrase_line(
+                "この布を二メートルください。ほかの色はありますか。",
+                "Kono nuno o ni meetoru kudasai. Hoka no iro wa arimasu ka.",
+                "Please give me two meters of this fabric. Do you have another color?",
+            ),
+            "likely_reply": phrase_line(
+                "はい、青とベージュがあります。",
+                "Hai, ao to beeju ga arimasu.",
+                "Yes, we have blue and beige.",
+            ),
+            "your_answer": phrase_line(
+                "じゃあ、青を二メートルお願いします。",
+                "Jaa, ao o ni meetoru onegaishimasu.",
+                "Then two meters of the blue, please.",
+            ),
+            "stretch_line": phrase_line(
+                "同じ柄で小さいサイズはありますか。",
+                "Onaji gara de chiisai saizu wa arimasu ka.",
+                "Do you have the same pattern in a smaller size?",
+            ),
+            "note": "Because you already know what you want, this is great real-world speaking practice.",
+            "source_ids": ["S35", "S48"],
+        },
+        {
+            "stop": "Tokyo final stay",
+            "date_window": "Nov 15-Nov 16",
+            "place": "Oedo Antique Market or Koedo Kawagoe old-town shops",
+            "situation": "Ask about age, authenticity, or whether photos are okay.",
+            "goal": "Have one curiosity-led exchange instead of just browsing silently.",
+            "words": [
+                vocab_item("骨董品", "kottouhin", "antiques"),
+                vocab_item("いつごろ", "itsu goro", "around when"),
+                vocab_item("本物", "honmono", "authentic / genuine"),
+                vocab_item("写真", "shashin", "photo"),
+            ],
+            "starter": phrase_line(
+                "これはいつごろのものですか。",
+                "Kore wa itsu goro no mono desu ka.",
+                "About when is this from?",
+            ),
+            "likely_reply": phrase_line(
+                "昭和のものです。",
+                "Shouwa no mono desu.",
+                "It's from the Showa period.",
+            ),
+            "your_answer": phrase_line(
+                "ありがとうございます。写真を撮ってもいいですか。",
+                "Arigatou gozaimasu. Shashin o totte mo ii desu ka.",
+                "Thank you. May I take a photo?",
+            ),
+            "stretch_line": phrase_line(
+                "本物ですか。",
+                "Honmono desu ka.",
+                "Is it authentic?",
+            ),
+            "note": "At markets and old-town shops, ask before taking photos and keep your voice low.",
+            "source_ids": ["S33", "S34", "S40", "S48", "S49"],
+        },
+    ]
+
     finance_rows = [
         {
             "category": "Flights",
@@ -1290,6 +1742,8 @@ def build_data() -> dict:
         "flight_options": flight_options,
         "dates_and_times_rows": dates_and_times_rows,
         "finance_rows": finance_rows,
+        "language_core_rows": language_core_rows,
+        "language_ideas_rows": language_ideas_rows,
         "requested_highlights": requested_highlights,
         "itinerary_rows": [
             {"dates": "Oct 28-Nov 1", "base": "Tokyo", "nights": 4, "rhythm": "Big-city landing, keep this block light, save Kusama/Oedo/Koedo for final Tokyo"},

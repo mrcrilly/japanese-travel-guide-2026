@@ -171,7 +171,7 @@ table,
 
 .tab-nav {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 18px;
   padding: 0;
@@ -307,6 +307,28 @@ tbody tr:last-child td {
 
 .sheet-value {
   line-height: 1.6;
+}
+
+.phrase-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.vocab-line,
+.example-line {
+  display: grid;
+  gap: 3px;
+}
+
+.romaji {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.translation {
+  color: var(--ink);
+  opacity: 0.82;
+  font-size: 0.94rem;
 }
 
 .flight-table {
@@ -447,6 +469,10 @@ tbody tr:last-child td {
     grid-template-columns: 1fr;
   }
 
+  .tab-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .map {
     height: 360px;
   }
@@ -470,6 +496,7 @@ tbody tr:last-child td {
 
   .tab-nav {
     gap: 8px;
+    grid-template-columns: 1fr;
   }
 
   .tab-button {

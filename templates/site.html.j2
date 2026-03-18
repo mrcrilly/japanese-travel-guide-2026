@@ -53,6 +53,7 @@
             <button type="button" class="tab-button is-active" role="tab" id="tab-button-guide" aria-controls="tab-panel-guide" aria-selected="true" data-tab-target="guide">Guide</button>
             <button type="button" class="tab-button" role="tab" id="tab-button-dates" aria-controls="tab-panel-dates" aria-selected="false" data-tab-target="dates">Dates and Times</button>
             <button type="button" class="tab-button" role="tab" id="tab-button-finances" aria-controls="tab-panel-finances" aria-selected="false" data-tab-target="finances">Finances</button>
+            <button type="button" class="tab-button" role="tab" id="tab-button-language" aria-controls="tab-panel-language" aria-selected="false" data-tab-target="language">Mike's Language Ideas</button>
           </div>
 
           <section class="tab-panel is-active" id="tab-panel-guide" role="tabpanel" aria-labelledby="tab-button-guide">
@@ -644,6 +645,227 @@
                           {% endfor %}
                         </div>
                         {% endif %}
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+          </section>
+
+          <section class="tab-panel" id="tab-panel-language" role="tabpanel" aria-labelledby="tab-button-language" hidden>
+            <section class="section two-column">
+              <div>
+                <div class="section-head">
+                  <p class="kicker">Mike's Language Ideas</p>
+                  <h2>Practice for the trip you are actually taking</h2>
+                </div>
+                <div class="callout">
+                  <p>
+                    This tab turns your itinerary into a set of short, repeatable Japanese conversations. The goal is not perfect textbook grammar. The goal is to get you starting interactions, understanding a likely answer, and replying once more without freezing.
+                  </p>
+                  <p>
+                    The examples below are deliberately short, polite, and practical. If someone answers too quickly, use
+                    <strong>「すみません、もう一度ゆっくりお願いします。」</strong>
+                    and keep the conversation going.
+                  </p>
+                  <div class="source-strip">
+                    <a href="{{ data.citations_by_id['S48'].url }}">S48</a>
+                    <a href="{{ data.citations_by_id['S49'].url }}">S49</a>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="section-head">
+                  <p class="kicker">How To Use It</p>
+                  <h2>One question, one answer, one follow-up</h2>
+                </div>
+                <div class="callout">
+                  <p>Each scenario is built around the same rhythm:</p>
+                  <p><strong>1.</strong> Open politely.</p>
+                  <p><strong>2.</strong> Ask a simple question you can remember.</p>
+                  <p><strong>3.</strong> Expect one likely answer.</p>
+                  <p><strong>4.</strong> Reply once more before switching back to English if needed.</p>
+                  <p>
+                    If you do that once or twice in each city, you will get much more speaking practice than trying to memorize long scripts.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">Core Phrases</p>
+                <h2>Reusable Japanese for the whole route</h2>
+                <p>
+                  Learn these first. They are the tools you will reuse in Tokyo, Osaka, markets, museums, trains, and shops.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.language_core_rows %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ row.topic }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Best use</td>
+                      <td class="sheet-value">{{ row.best_use }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Words to learn</td>
+                      <td class="sheet-value">
+                        <div class="phrase-stack">
+                          {% for item in row.words %}
+                          <div class="vocab-line">
+                            <strong>{{ item.japanese }}</strong>
+                            <span class="romaji">{{ item.romaji }}</span>
+                            <span class="translation">{{ item.meaning }}</span>
+                          </div>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Try saying</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.try_line.japanese }}</strong>
+                          <span class="romaji">{{ row.try_line.romaji }}</span>
+                          <span class="translation">{{ row.try_line.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Likely reply</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.likely_reply.japanese }}</strong>
+                          <span class="romaji">{{ row.likely_reply.romaji }}</span>
+                          <span class="translation">{{ row.likely_reply.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ row.note }}
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">By Stop</p>
+                <h2>Conversation ideas mapped to your itinerary</h2>
+                <p>
+                  These are the best places in this exact route to try short Japanese conversations. Each one is a low-risk exchange that matches something you are already likely to do.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.language_ideas_rows %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ row.stop }} | {{ row.place }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Date window</td>
+                      <td class="sheet-value">{{ row.date_window }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Situation</td>
+                      <td class="sheet-value">{{ row.situation }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Goal</td>
+                      <td class="sheet-value">{{ row.goal }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Words to learn</td>
+                      <td class="sheet-value">
+                        <div class="phrase-stack">
+                          {% for item in row.words %}
+                          <div class="vocab-line">
+                            <strong>{{ item.japanese }}</strong>
+                            <span class="romaji">{{ item.romaji }}</span>
+                            <span class="translation">{{ item.meaning }}</span>
+                          </div>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Try saying</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.starter.japanese }}</strong>
+                          <span class="romaji">{{ row.starter.romaji }}</span>
+                          <span class="translation">{{ row.starter.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Likely reply</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.likely_reply.japanese }}</strong>
+                          <span class="romaji">{{ row.likely_reply.romaji }}</span>
+                          <span class="translation">{{ row.likely_reply.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">You can answer</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.your_answer.japanese }}</strong>
+                          <span class="romaji">{{ row.your_answer.romaji }}</span>
+                          <span class="translation">{{ row.your_answer.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Stretch line</td>
+                      <td class="sheet-value">
+                        <div class="example-line">
+                          <strong>{{ row.stretch_line.japanese }}</strong>
+                          <span class="romaji">{{ row.stretch_line.romaji }}</span>
+                          <span class="translation">{{ row.stretch_line.english }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ row.note }}
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
                       </td>
                     </tr>
                   </tbody>
