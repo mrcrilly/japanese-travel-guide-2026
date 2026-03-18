@@ -707,7 +707,10 @@ def build_data() -> dict:
     flight_options = [
         {
             "name": "Keep it direct",
-            "pattern": "Brisbane → Tokyo direct, then Tokyo → Brisbane direct",
+            "pattern_steps": [
+                "Brisbane → Tokyo direct",
+                "Tokyo → Brisbane direct",
+            ],
             "air_time": "about 8h 55m-9h 10m outbound and 8h 50m-9h 05m inbound",
             "flight_cost": aud_amount(direct_round_trip_aud),
             "family_cost": aud_amount(family_cost(direct_round_trip_aud)),
@@ -722,7 +725,12 @@ def build_data() -> dict:
         },
         {
             "name": "Singapore stopover outbound",
-            "pattern": "Brisbane → Singapore, 2 nights in Singapore, then Singapore → Tokyo; return Tokyo → Brisbane direct",
+            "pattern_steps": [
+                "Brisbane → Singapore",
+                "2 nights in Singapore",
+                "Singapore → Tokyo",
+                "Tokyo → Brisbane direct",
+            ],
             "air_time": "about 7h 40m-8h 00m to Singapore, 6h 30m-6h 35m to Tokyo, then 8h 50m-9h 05m home",
             "flight_cost": aud_amount(singapore_stopover_round_trip_aud),
             "family_cost": aud_amount(family_cost(singapore_stopover_round_trip_aud)),

@@ -356,6 +356,16 @@ tbody tr:last-child td {
   line-height: 1.6;
 }
 
+.route-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style: decimal;
+}
+
+.route-list li + li {
+  margin-top: 0.35rem;
+}
+
 .flight-price {
   font-weight: 800;
   color: var(--accent-deep);
