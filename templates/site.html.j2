@@ -109,52 +109,6 @@
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-head">
-            <p class="kicker">Airport Access</p>
-            <h2>Getting to the airport and into Tokyo</h2>
-            <p>
-              The guide now includes the first and last practical legs around the flight itself: getting from Brisbane-side starting points to BNE, then getting from your Tokyo arrival airport into the city. These times are the right planning numbers to use around the bigger international travel day.
-            </p>
-          </div>
-          <div class="table-card">
-            <table>
-              <thead>
-                <tr>
-                  <th>Phase</th>
-                  <th>Route</th>
-                  <th>Best for</th>
-                  <th>Travel time</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in data.airport_access %}
-                <tr>
-                  <td>{{ row.phase }}</td>
-                  <td>
-                    <strong>{{ row.route }}</strong>
-                    <div class="table-links">
-                      <a href="{{ row.maps_url }}">Map route</a>
-                    </div>
-                  </td>
-                  <td>{{ row.best_for }}</td>
-                  <td>{{ row.timing }}</td>
-                  <td>
-                    {{ row.notes }}
-                    <div class="source-strip">
-                      {% for source_id in row.source_ids %}
-                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
-                      {% endfor %}
-                    </div>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         <section class="section two-column">
           <div>
             <div class="section-head">

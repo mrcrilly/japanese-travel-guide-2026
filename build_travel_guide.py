@@ -261,46 +261,6 @@ def build_data() -> dict:
             "note": "FX basis for AUD conversion. This guide uses the latest verified market close I could confirm in-session: AUD/JPY 113.46 on March 12, 2026.",
         },
         {
-            "id": "S24",
-            "title": "Woolloongabba to Brisbane Airport (BNE)",
-            "publisher": "Rome2Rio",
-            "url": "https://www.rome2rio.com/s/Woolloongabba/Brisbane-Airport-BNE",
-            "accessed": "2026-03-18",
-            "note": "Used for Woolloongabba to Brisbane Airport public-transport timing.",
-        },
-        {
-            "id": "S25",
-            "title": "Driving time from Woolloongabba to BNE",
-            "publisher": "Travelmath",
-            "url": "https://www.travelmath.com/driving-time/from/Woolloongabba%2C%2BAustralia/to/BNE",
-            "accessed": "2026-03-18",
-            "note": "Used for a typical driving-time estimate from Woolloongabba to Brisbane Airport.",
-        },
-        {
-            "id": "S26",
-            "title": "Sumner to Brisbane Airport (BNE)",
-            "publisher": "Rome2Rio",
-            "url": "https://www.rome2rio.com/s/Sumner-QLD-Australia/Brisbane-Airport-BNE",
-            "accessed": "2026-03-18",
-            "note": "Used for Sumner to Brisbane Airport drive and public-transport timing.",
-        },
-        {
-            "id": "S27",
-            "title": "Haneda Airport - getting there, terminal info, and more",
-            "publisher": "GO TOKYO",
-            "url": "https://www.gotokyo.org/en/plan/airport-access/haneda-airport/",
-            "accessed": "2026-03-18",
-            "note": "Official Tokyo tourism guidance for Haneda to central Tokyo access times.",
-        },
-        {
-            "id": "S28",
-            "title": "Narita International Airport - getting there, terminal info, and more",
-            "publisher": "GO TOKYO",
-            "url": "https://www.gotokyo.org/en/plan/airport-access/narita-airport/index.html",
-            "accessed": "2026-03-18",
-            "note": "Official Tokyo tourism guidance for Narita to central Tokyo access times.",
-        },
-        {
             "id": "S29",
             "title": "Brisbane to Tokyo flight schedules",
             "publisher": "Wego",
@@ -587,63 +547,6 @@ def build_data() -> dict:
             "family_cost": family_cost((3960, 4000)),
             "notes": "Late-October and November travelers should assume separate transport because current 2026 guidance says the pass is not sold in October or November.",
             "source_ids": ["S16", "S17", "S18"],
-        },
-    ]
-
-    airport_access = [
-        {
-            "phase": "Departure day",
-            "route": "Woolloongabba → Brisbane International Airport",
-            "best_for": "fastest road option",
-            "timing": "about 17 min by car",
-            "notes": "Fast if you have a family drop-off or taxi. Traffic can obviously move this around, especially in the morning peak.",
-            "source_ids": ["S25"],
-            "map_points": ["Woolloongabba QLD", "Brisbane International Airport"],
-        },
-        {
-            "phase": "Departure day",
-            "route": "Woolloongabba → Brisbane International Airport",
-            "best_for": "public transport",
-            "timing": "about 34 min by train",
-            "notes": "Rome2Rio shows a direct rail option from Boggo Road to the International Airport station, which is the cleanest non-car choice.",
-            "source_ids": ["S24"],
-            "map_points": ["Boggo Road Station", "Brisbane International Airport"],
-        },
-        {
-            "phase": "Departure day",
-            "route": "Sumner → Brisbane International Airport",
-            "best_for": "fastest road option",
-            "timing": "about 26 min by car",
-            "notes": "This is the practical family option from Sumner if you are trying to keep the airport leg simple.",
-            "source_ids": ["S26"],
-            "map_points": ["Sumner QLD", "Brisbane International Airport"],
-        },
-        {
-            "phase": "Departure day",
-            "route": "Sumner → Brisbane International Airport",
-            "best_for": "public transport",
-            "timing": "about 1h 3m by train",
-            "notes": "Rome2Rio shows the train as the best public-transport option, typically via Darra and Eagle Junction.",
-            "source_ids": ["S26"],
-            "map_points": ["Sumner Station", "Brisbane International Airport"],
-        },
-        {
-            "phase": "Arrival day in Japan",
-            "route": "Haneda Airport → Tokyo Station / central Tokyo",
-            "best_for": "fastest rail arrival",
-            "timing": "about 20-24 min by train",
-            "notes": "Official GO TOKYO guidance puts Haneda Terminal 3 at 13 minutes to Hamamatsucho plus 7 minutes to Tokyo Station, or roughly 24 minutes via Shinagawa. If you can choose airports, Haneda is materially easier for a family arrival day.",
-            "source_ids": ["S27"],
-            "map_points": ["Haneda Airport Terminal 3", "Tokyo Station"],
-        },
-        {
-            "phase": "Arrival day in Japan",
-            "route": "Narita Airport → Tokyo Station / central Tokyo",
-            "best_for": "most predictable rail arrival",
-            "timing": "about 60 min by Narita Express",
-            "notes": "Official GO TOKYO guidance puts Narita Express at about 60 minutes to Tokyo Station. The airport bus can be as fast as 68 minutes but is more traffic-sensitive.",
-            "source_ids": ["S28"],
-            "map_points": ["Narita International Airport", "Tokyo Station"],
         },
     ]
 
@@ -1023,9 +926,6 @@ def build_data() -> dict:
         row["adult_cost_label"] = money(row["adult_cost"])
         row["family_cost_label"] = money(row["family_cost"])
 
-    for row in airport_access:
-        row["maps_url"] = build_google_maps_direction(row["map_points"])
-
     for food in food_budgets:
         food["per_person_label"] = money(food["per_person"])
         food["family_of_four_label"] = money(food["family_of_four"])
@@ -1115,7 +1015,6 @@ def build_data() -> dict:
                 "detail": "Close to a 50/50 sightseeing mix without making the route feel frantic",
             },
         ],
-        "airport_access": airport_access,
         "japan_time_math": japan_time_math,
         "flight_options": flight_options,
         "requested_highlights": requested_highlights,
