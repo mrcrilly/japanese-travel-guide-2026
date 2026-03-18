@@ -243,6 +243,26 @@
         <section class="section">
           <div class="section-head">
             <p class="kicker">Transport</p>
+            <h2>Worst-case flight budget</h2>
+            <p>
+              If you just want the ceiling number before looking at trains and buses inside Japan, use these AUD-only flight estimates.
+            </p>
+          </div>
+          <div class="food-grid">
+            {% for item in data.worst_case_flight_cards %}
+            <article class="food-card">
+              <h3>{{ item.title }}</h3>
+              <p><strong>Per person:</strong> {{ item.per_person }}</p>
+              <p><strong>Family of 4:</strong> {{ item.family }}</p>
+              <p>{{ item.notes }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Transport</p>
             <h2>Intercity cost estimate</h2>
             <p>
               These are one-way planning numbers between each base. The Hiroshima to Kanazawa segment is shown as a range because it now spans multiple operators and seat choices after the Hokuriku extension.

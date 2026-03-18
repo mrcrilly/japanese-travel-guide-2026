@@ -592,6 +592,21 @@ def build_data() -> dict:
         },
     ]
 
+    worst_case_flight_cards = [
+        {
+            "title": "Direct worst case",
+            "per_person": "AUD 1,850",
+            "family": "AUD 7,400",
+            "notes": "Assumes the upper end of the current direct-economy planning range for Brisbane ↔ Tokyo.",
+        },
+        {
+            "title": "Via Singapore worst case",
+            "per_person": "AUD 1,850",
+            "family": "AUD 7,400",
+            "notes": "Assumes upper-end flight-only pricing for Brisbane → Singapore → Tokyo outbound plus direct Tokyo → Brisbane return. This excludes the extra Singapore hotel and food cost.",
+        },
+    ]
+
     requested_highlights = [
         {
             "title": "Boutique stay near Yoyogi-Koen",
@@ -1017,6 +1032,7 @@ def build_data() -> dict:
         ],
         "japan_time_math": japan_time_math,
         "flight_options": flight_options,
+        "worst_case_flight_cards": worst_case_flight_cards,
         "requested_highlights": requested_highlights,
         "itinerary_rows": [
             {"dates": "Oct 28-Nov 1", "base": "Tokyo", "nights": 4, "rhythm": "Big-city landing, keep this block light, save Kusama/Oedo/Koedo for final Tokyo"},
