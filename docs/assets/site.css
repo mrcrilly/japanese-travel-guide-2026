@@ -537,6 +537,10 @@ tbody tr:last-child td {
     padding: 8px;
   }
 
+  .citations-section {
+    display: none;
+  }
+
   .source-card {
     padding: 16px;
     gap: 8px;
