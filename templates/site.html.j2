@@ -211,6 +211,7 @@
                   <th>Flight pattern</th>
                   <th>Air time</th>
                   <th>Economy flights</th>
+                  <th>Price breakdown</th>
                   <th>Family of 4</th>
                   <th>Japan time impact</th>
                   <th>Notes</th>
@@ -223,6 +224,11 @@
                   <td>{{ row.pattern }}</td>
                   <td>{{ row.air_time }}</td>
                   <td>{{ row.flight_cost }}</td>
+                  <td>
+                    {% for item in row.price_breakdown %}
+                    <div>{{ item }}</div>
+                    {% endfor %}
+                  </td>
                   <td>{{ row.family_cost }}</td>
                   <td>{{ row.japan_time }}</td>
                   <td>

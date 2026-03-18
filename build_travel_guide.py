@@ -664,6 +664,10 @@ def build_data() -> dict:
             "air_time": "about 8h 55m-9h 10m outbound and 8h 50m-9h 05m inbound",
             "flight_cost": aud_amount((1700, 1850)),
             "family_cost": aud_amount((6800, 7400)),
+            "price_breakdown": [
+                "Brisbane → Tokyo direct: AUD 850-925 pp",
+                "Tokyo → Brisbane direct: AUD 850-925 pp",
+            ],
             "japan_time": "20 nights / 19 full days in Japan",
             "notes": "Use this if Japan is the priority. Current JAL pricing suggests direct economy is roughly in this band round-trip per person for planning purposes.",
             "source_ids": ["S29", "S30", "S41", "S42"],
@@ -674,6 +678,11 @@ def build_data() -> dict:
             "air_time": "about 7h 40m-8h 00m to Singapore, 6h 30m-6h 35m to Tokyo, then 8h 50m-9h 05m home",
             "flight_cost": aud_amount((1650, 1850)),
             "family_cost": aud_amount((6600, 7400)),
+            "price_breakdown": [
+                "Brisbane → Singapore: AUD 400-450 pp",
+                f"Singapore → Tokyo: {sgd_to_aud((352, 450))} pp",
+                "Tokyo → Brisbane direct: AUD 850-950 pp",
+            ],
             "japan_time": "18 nights / 17 full days in Japan",
             "notes": f"Flight-only cost is broadly similar to the direct option once you estimate one-way pricing from current round-trip fares. Brisbane-Singapore is around {aud_amount((400, 450))} pp one-way; Singapore-Tokyo works out to about {sgd_to_aud((352, 450))} pp one-way using S$1 = AUD {SGD_TO_AUD:.2f}; Tokyo-Brisbane direct is roughly {aud_amount((850, 950))} pp one-way. The tradeoff is that you lose 2 Japan nights and still need to pay for 2 Singapore hotel nights plus food.",
             "source_ids": ["S30", "S43", "S44", "S45", "S46", "S47"],
