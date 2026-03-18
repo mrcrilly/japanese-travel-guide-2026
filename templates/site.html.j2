@@ -197,6 +197,51 @@
 
         <section class="section">
           <div class="section-head">
+            <p class="kicker">Flight Options</p>
+            <h2>Direct Japan vs a 2-night Singapore stop</h2>
+            <p>
+              If you add two nights in Singapore on the way over and still come home direct from Tokyo to Brisbane, the flight-only cost does not obviously improve. The real tradeoff is time: you give up two Japan nights and two full Japan sightseeing days in exchange for the Singapore stop.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Option</th>
+                  <th>Flight pattern</th>
+                  <th>Air time</th>
+                  <th>Economy flights</th>
+                  <th>Family of 4</th>
+                  <th>Japan time impact</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data.flight_options %}
+                <tr>
+                  <td><strong>{{ row.name }}</strong></td>
+                  <td>{{ row.pattern }}</td>
+                  <td>{{ row.air_time }}</td>
+                  <td>{{ row.flight_cost }}</td>
+                  <td>{{ row.family_cost }}</td>
+                  <td>{{ row.japan_time }}</td>
+                  <td>
+                    {{ row.notes }}
+                    <div class="source-strip">
+                      {% for source_id in row.source_ids %}
+                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
             <p class="kicker">Must-Dos</p>
             <h2>Your wife's requested additions</h2>
             <p>

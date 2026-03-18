@@ -21,6 +21,8 @@ DOCS_DIR = ROOT / "docs"
 FX_DATE = "2026-03-12"
 AUD_JPY_CLOSE = 113.46
 JPY_TO_AUD = 1 / AUD_JPY_CLOSE
+SGD_AUD_FX_DATE = "2026-03-12"
+SGD_TO_AUD = 1.10
 
 
 def yen(value: int | tuple[int, int]) -> str:
@@ -37,6 +39,18 @@ def aud(value: int | tuple[int, int]) -> str:
 
 def money(value: int | tuple[int, int]) -> str:
     return f"{yen(value)} / {aud(value)}"
+
+
+def aud_amount(value: int | float | tuple[int | float, int | float]) -> str:
+    if isinstance(value, tuple):
+        return f"AUD {value[0]:,.0f}-{value[1]:,.0f}"
+    return f"AUD {value:,.0f}"
+
+
+def sgd_to_aud(value: int | float | tuple[int | float, int | float]) -> str:
+    if isinstance(value, tuple):
+        return aud_amount((value[0] * SGD_TO_AUD, value[1] * SGD_TO_AUD))
+    return aud_amount(value * SGD_TO_AUD)
 
 
 def family_cost(value: int | tuple[int, int], family_size: int = 4) -> int | tuple[int, int]:
@@ -382,6 +396,62 @@ def build_data() -> dict:
             "accessed": "2026-03-18",
             "note": "Official Oedo page stating that the Tokyo International Forum market is held on the first and third Sunday of each month.",
         },
+        {
+            "id": "S41",
+            "title": "Flights from Brisbane to Tokyo (BNE-TYO) on Japan Airlines",
+            "publisher": "Japan Airlines",
+            "url": "https://www.jal.co.jp/flights/en-au/flights-from-brisbane-to-tokyo",
+            "accessed": "2026-03-18",
+            "note": "Used for direct Brisbane-Tokyo economy fare estimates.",
+        },
+        {
+            "id": "S42",
+            "title": "Flights from Tokyo to Brisbane (TYO-BNE) on Japan Airlines",
+            "publisher": "Japan Airlines",
+            "url": "https://www.jal.co.jp/flights/en-jp/flights-from-tokyo-to-brisbane",
+            "accessed": "2026-03-18",
+            "note": "Used for direct Tokyo-Brisbane economy fare estimates.",
+        },
+        {
+            "id": "S43",
+            "title": "Flights from Brisbane to Singapore",
+            "publisher": "Singapore Airlines",
+            "url": "https://www.singaporeair.com/en-au/flights-from-brisbane-to-singapore-sg",
+            "accessed": "2026-03-18",
+            "note": "Used for Brisbane-Singapore economy fare estimates.",
+        },
+        {
+            "id": "S44",
+            "title": "Flights from Singapore to Tokyo",
+            "publisher": "Singapore Airlines",
+            "url": "https://www.singaporeair.com/en-sg/flights-from-singapore-to-tokyo",
+            "accessed": "2026-03-18",
+            "note": "Used for Singapore-Tokyo economy fare estimates.",
+        },
+        {
+            "id": "S45",
+            "title": "Singapore dollar to Australian dollars exchange rate history",
+            "publisher": "Wise",
+            "url": "https://wise.com/us/currency-converter/sgd-to-aud-rate/history",
+            "accessed": "2026-03-18",
+            "note": "Used to convert Singapore-dollar flight fares into AUD at the March 12, 2026 mid-market rate.",
+        },
+        {
+            "id": "S46",
+            "title": "Flight schedules from Brisbane to Singapore",
+            "publisher": "Wego",
+            "url": "https://www.wego.com/schedules/bne/sg/flight-schedules-from-brisbane-903-to-singapore",
+            "accessed": "2026-03-18",
+            "note": "Used for Brisbane-Singapore flight-time estimates.",
+        },
+        {
+            "id": "S47",
+            "title": "Flight schedules from Singapore to Tokyo",
+            "publisher": "Wego",
+            "url": "https://www.wego.com/schedules/sin/tyo/flight-schedules-from-singapore-to-tokyo",
+            "accessed": "2026-03-18",
+            "note": "Used for Singapore-Tokyo flight-time estimates.",
+        },
     ]
 
     intercity_segments = [
@@ -586,6 +656,29 @@ def build_data() -> dict:
         "full_days": 19,
         "source_ids": ["S29", "S30"],
     }
+
+    flight_options = [
+        {
+            "name": "Keep it direct",
+            "pattern": "Brisbane → Tokyo direct, then Tokyo → Brisbane direct",
+            "air_time": "about 8h 55m-9h 10m outbound and 8h 50m-9h 05m inbound",
+            "flight_cost": aud_amount((1700, 1850)),
+            "family_cost": aud_amount((6800, 7400)),
+            "japan_time": "20 nights / 19 full days in Japan",
+            "notes": "Use this if Japan is the priority. Current JAL pricing suggests direct economy is roughly in this band round-trip per person for planning purposes.",
+            "source_ids": ["S29", "S30", "S41", "S42"],
+        },
+        {
+            "name": "Singapore stopover outbound",
+            "pattern": "Brisbane → Singapore, 2 nights in Singapore, then Singapore → Tokyo; return Tokyo → Brisbane direct",
+            "air_time": "about 7h 40m-8h 00m to Singapore, 6h 30m-6h 35m to Tokyo, then 8h 50m-9h 05m home",
+            "flight_cost": aud_amount((1650, 1850)),
+            "family_cost": aud_amount((6600, 7400)),
+            "japan_time": "18 nights / 17 full days in Japan",
+            "notes": f"Flight-only cost is broadly similar to the direct option once you estimate one-way pricing from current round-trip fares. Brisbane-Singapore is around {aud_amount((400, 450))} pp one-way; Singapore-Tokyo works out to about {sgd_to_aud((352, 450))} pp one-way using S$1 = AUD {SGD_TO_AUD:.2f}; Tokyo-Brisbane direct is roughly {aud_amount((850, 950))} pp one-way. The tradeoff is that you lose 2 Japan nights and still need to pay for 2 Singapore hotel nights plus food.",
+            "source_ids": ["S30", "S43", "S44", "S45", "S46", "S47"],
+        },
+    ]
 
     requested_highlights = [
         {
@@ -1015,6 +1108,7 @@ def build_data() -> dict:
         ],
         "airport_access": airport_access,
         "japan_time_math": japan_time_math,
+        "flight_options": flight_options,
         "requested_highlights": requested_highlights,
         "itinerary_rows": [
             {"dates": "Oct 28-Nov 1", "base": "Tokyo", "nights": 4, "rhythm": "Big-city landing, keep this block light, save Kusama/Oedo/Koedo for final Tokyo"},
