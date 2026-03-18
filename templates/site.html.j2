@@ -109,46 +109,6 @@
           </div>
         </section>
 
-        <section class="section two-column">
-          <div>
-            <div class="section-head">
-              <p class="kicker">Trip Math</p>
-              <h2>How many days are you actually in Japan?</h2>
-            </div>
-            <div class="callout">
-              <p>{{ data.japan_time_math.assumption }}</p>
-              <p>{{ data.japan_time_math.outbound }}</p>
-              <p>{{ data.japan_time_math.return }}</p>
-              <p>
-                Result:
-                <strong>{{ data.japan_time_math.nights }} nights in Japan</strong>,
-                <strong>{{ data.japan_time_math.calendar_days }} calendar dates touched</strong>,
-                and <strong>{{ data.japan_time_math.full_days }} full sightseeing days between arrival and departure</strong>.
-              </p>
-              <div class="source-strip">
-                {% for source_id in data.japan_time_math.source_ids %}
-                <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="section-head">
-              <p class="kicker">Interpretation</p>
-              <h2>What that means for planning</h2>
-            </div>
-            <div class="callout">
-              <p>
-                Your earlier 20-night structure is still the right planning shape. The useful correction is that the trip gives you
-                <strong>19 full sightseeing days</strong>, not 20 or 21 fully usable days.
-              </p>
-              <p>
-                That is why the guide now pushes your higher-friction Tokyo wish-list items into the final Tokyo block instead of cramming them into the jet-lagged arrival stretch.
-              </p>
-            </div>
-          </div>
-        </section>
-
         <section class="section">
           <div class="section-head">
             <p class="kicker">Flight Options</p>
@@ -197,6 +157,46 @@
                 {% endfor %}
               </tbody>
             </table>
+          </div>
+        </section>
+
+        <section class="section two-column">
+          <div>
+            <div class="section-head">
+              <p class="kicker">Trip Math</p>
+              <h2>How many days are you actually in Japan?</h2>
+            </div>
+            <div class="callout">
+              <p>{{ data.japan_time_math.assumption }}</p>
+              <p>{{ data.japan_time_math.outbound }}</p>
+              <p>{{ data.japan_time_math.return }}</p>
+              <p>
+                Result:
+                <strong>{{ data.japan_time_math.nights }} nights in Japan</strong>,
+                <strong>{{ data.japan_time_math.calendar_days }} calendar dates touched</strong>,
+                and <strong>{{ data.japan_time_math.full_days }} full sightseeing days between arrival and departure</strong>.
+              </p>
+              <div class="source-strip">
+                {% for source_id in data.japan_time_math.source_ids %}
+                <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="section-head">
+              <p class="kicker">Interpretation</p>
+              <h2>What that means for planning</h2>
+            </div>
+            <div class="callout">
+              <p>
+                Your earlier 20-night structure is still the right planning shape. The useful correction is that the trip gives you
+                <strong>19 full sightseeing days</strong>, not 20 or 21 fully usable days.
+              </p>
+              <p>
+                That is why the guide now pushes your higher-friction Tokyo wish-list items into the final Tokyo block instead of cramming them into the jet-lagged arrival stretch.
+              </p>
+            </div>
           </div>
         </section>
 
