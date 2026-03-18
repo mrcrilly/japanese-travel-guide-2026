@@ -170,28 +170,28 @@ table,
 }
 
 .tab-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
   margin-bottom: 18px;
-  padding: 0 6px;
-  border-bottom: 1px solid var(--line);
+  padding: 0;
 }
 
 .tab-button {
   appearance: none;
   border: 1px solid rgba(29, 43, 49, 0.12);
-  border-bottom: 0;
-  background: rgba(244, 235, 222, 0.92);
+  background: linear-gradient(180deg, rgba(244, 235, 222, 0.96), rgba(233, 220, 202, 0.96));
   color: var(--muted);
-  border-radius: 18px 18px 0 0;
-  padding: 13px 18px;
+  border-radius: 22px;
+  padding: 22px 20px;
   font: inherit;
   font-weight: 800;
+  font-size: 1.05rem;
   cursor: pointer;
   transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
-  position: relative;
-  top: 1px;
+  min-height: 82px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
 }
 
 .tab-button:hover {
@@ -203,6 +203,7 @@ table,
   background: rgba(255, 250, 242, 0.98);
   color: var(--ink);
   border-color: rgba(29, 43, 49, 0.12);
+  transform: translateY(-2px);
 }
 
 .tab-panel[hidden] {

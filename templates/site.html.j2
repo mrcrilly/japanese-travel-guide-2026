@@ -126,6 +126,109 @@
 
             <section class="section">
               <div class="section-head">
+                <p class="kicker">Flight Options</p>
+                <h2>Direct Japan vs a 2-night Singapore stop</h2>
+                <p>
+                  This keeps the main flight comparison inside the core guide. The Singapore option only makes sense if you actively want the stopover, because it gives away Japan time without producing a clearly better flight-only cost.
+                </p>
+              </div>
+              <div class="table-card flight-table-card">
+                <table class="flight-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.flight_options %}
+                  <tbody class="flight-option-group">
+                    <tr>
+                      <th colspan="2" class="flight-option-heading">{{ row.name }}</th>
+                    </tr>
+                    <tr>
+                      <td class="flight-item-label">Flight pattern</td>
+                      <td><div class="flight-cell-main">{{ row.pattern }}</div></td>
+                    </tr>
+                    <tr>
+                      <td class="flight-item-label">Air time</td>
+                      <td><div class="flight-cell-main">{{ row.air_time }}</div></td>
+                    </tr>
+                    <tr>
+                      <td class="flight-item-label">Economy flight cost</td>
+                      <td>
+                        <div class="flight-price">{{ row.flight_cost }} per person</div>
+                        <div class="flight-price flight-price-sub">{{ row.family_cost }} for 4 people</div>
+                        <div class="flight-breakdown-list">
+                          {% for item in row.price_breakdown %}
+                          <div class="flight-breakdown-item">{{ item }}</div>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="flight-item-label">Japan time impact</td>
+                      <td><div class="flight-cell-main">{{ row.japan_time }}</div></td>
+                    </tr>
+                    <tr>
+                      <td class="flight-item-label">Planning notes</td>
+                      <td>
+                        <div class="flight-cell-main">{{ row.notes }}</div>
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+
+            <section class="section two-column">
+              <div>
+                <div class="section-head">
+                  <p class="kicker">Trip Math</p>
+                  <h2>How many days are you actually in Japan?</h2>
+                </div>
+                <div class="callout">
+                  <p>{{ data.japan_time_math.assumption }}</p>
+                  <p>{{ data.japan_time_math.outbound }}</p>
+                  <p>{{ data.japan_time_math.return }}</p>
+                  <p>
+                    Result:
+                    <strong>{{ data.japan_time_math.nights }} nights in Japan</strong>,
+                    <strong>{{ data.japan_time_math.calendar_days }} calendar dates touched</strong>,
+                    and <strong>{{ data.japan_time_math.full_days }} full sightseeing days between arrival and departure</strong>.
+                  </p>
+                  <div class="source-strip">
+                    {% for source_id in data.japan_time_math.source_ids %}
+                    <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="section-head">
+                  <p class="kicker">Interpretation</p>
+                  <h2>What that means for planning</h2>
+                </div>
+                <div class="callout">
+                  <p>
+                    Your earlier 20-night structure is still the right planning shape. The useful correction is that the trip gives you
+                    <strong>19 full sightseeing days</strong>, not 20 or 21 fully usable days.
+                  </p>
+                  <p>
+                    If you choose the Singapore stopover instead, the Japan portion drops to
+                    <strong>18 nights and 17 full sightseeing days</strong>.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
                 <p class="kicker">Must-Dos</p>
                 <h2>Your wife's requested additions</h2>
                 <p>
@@ -147,6 +250,159 @@
                   </div>
                 </article>
                 {% endfor %}
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">Transport</p>
+                <h2>Intercity cost estimate</h2>
+                <p>
+                  These are the one-way planning numbers between each main base in Japan. Use the finances tab if you want the same data in one consolidated ledger.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.intercity_segments %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ row.from }} → {{ row.to }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Mode</td>
+                      <td class="sheet-value">{{ row.mode }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Time</td>
+                      <td class="sheet-value">{{ row.duration }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Adult estimate</td>
+                      <td class="sheet-value">{{ row.adult_cost_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Family of 4</td>
+                      <td class="sheet-value">{{ row.family_cost_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ row.notes }}
+                        <div class="table-links">
+                          <a href="{{ row.maps_url }}">Map route</a>
+                        </div>
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">Day Trips</p>
+                <h2>Base-to-excursion transport estimate</h2>
+                <p>
+                  These are the out-of-city transport numbers that sit behind the 50/50 city-versus-day-trip split.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.day_trip_rows %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ row.base }} → {{ row.trip }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Adult estimate</td>
+                      <td class="sheet-value">{{ row.adult_cost_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Family of 4</td>
+                      <td class="sheet-value">{{ row.family_cost_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ row.notes }}
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">Food</p>
+                <h2>Expected daily food cost</h2>
+                <p>
+                  These are the working daily food ranges for each stop, with the likely bump for excursion days.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for item in data.food_budgets %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ item.location }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Per person</td>
+                      <td class="sheet-value">{{ item.per_person_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Family of 4</td>
+                      <td class="sheet-value">{{ item.family_of_four_label }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Day-trip bump</td>
+                      <td class="sheet-value">{{ item.day_trip_add_on }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ item.notes }}
+                        <div class="source-strip">
+                          {% for source_id in item.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
               </div>
             </section>
 
