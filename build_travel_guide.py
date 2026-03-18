@@ -712,12 +712,12 @@ def build_data() -> dict:
             "flight_cost": aud_amount(direct_round_trip_aud),
             "family_cost": aud_amount(family_cost(direct_round_trip_aud)),
             "price_breakdown": [
-                f"Jetstar direct base fare: about {aud_amount(airline_cache['jetstar']['per_direction_aud'])} pp each way",
-                f"Qantas direct planning band: about {aud_amount(airline_cache['qantas']['per_direction_aud'])} pp each way",
-                f"Japan Airlines direct planning band: about {aud_amount(airline_cache['jal']['per_direction_aud'])} pp each way",
+                f"Jetstar direct base fare: about {aud_amount(airline_cache['jetstar']['per_direction_aud'])} pp each way, or {aud_amount(airline_cache['jetstar']['round_trip_aud'])} return",
+                f"Qantas direct planning band: about {aud_amount(airline_cache['qantas']['per_direction_aud'])} pp each way, or {aud_amount(airline_cache['qantas']['round_trip_aud'])} return",
+                f"Japan Airlines direct planning band: about {aud_amount(airline_cache['jal']['per_direction_aud'])} pp each way, or {aud_amount(airline_cache['jal']['round_trip_aud'])} return",
             ],
             "japan_time": "20 nights / 19 full days in Japan",
-            "notes": "This is now a real market spread rather than a single-airline assumption. Jetstar is the cheapest direct entry point if you can tolerate low-cost extras, Qantas sits in the middle, and JAL remains the higher full-service direct reference closest to your travel window.",
+            "notes": "All headline totals in this row are estimated return fares per person unless a line explicitly says one-way or each way. Jetstar is the cheapest direct entry point if you can tolerate low-cost extras, Qantas sits in the middle, and JAL remains the higher full-service direct reference closest to your travel window.",
             "source_ids": ["S29", "S30", "S41", "S50", "S51", "S52", "S53"],
         },
         {
@@ -732,7 +732,7 @@ def build_data() -> dict:
                 f"Tokyo → Brisbane direct: {aud_amount(stopover_cache['tokyo_to_brisbane_direct_aud'])} pp",
             ],
             "japan_time": "18 nights / 17 full days in Japan",
-            "notes": f"Treat this as a deliberate stopover choice, not the cheapest routing. The current airline checks suggest Jetstar direct and some one-stop carriers are cheaper than constructing a Singapore stop plus a separate direct return. Brisbane-Singapore is around {aud_amount(stopover_cache['brisbane_to_singapore_aud'])} pp one-way; Singapore-Tokyo works out to about {sgd_to_aud(stopover_cache['singapore_to_tokyo_sgd'])} pp one-way using S$1 = AUD {SGD_TO_AUD:.2f}; Tokyo-Brisbane direct is roughly {aud_amount(stopover_cache['tokyo_to_brisbane_direct_aud'])} pp one-way.",
+            "notes": f"The headline total here is an estimated return total per person for the whole stopover routing. The leg lines underneath are one-way components. Treat this as a deliberate stopover choice, not the cheapest routing. The current airline checks suggest Jetstar direct and some one-stop carriers are cheaper than constructing a Singapore stop plus a separate direct return. Brisbane-Singapore is around {aud_amount(stopover_cache['brisbane_to_singapore_aud'])} pp one-way; Singapore-Tokyo works out to about {sgd_to_aud(stopover_cache['singapore_to_tokyo_sgd'])} pp one-way using S$1 = AUD {SGD_TO_AUD:.2f}; Tokyo-Brisbane direct is roughly {aud_amount(stopover_cache['tokyo_to_brisbane_direct_aud'])} pp one-way.",
             "source_ids": ["S30", "S43", "S44", "S45", "S46", "S47", "S56"],
         },
     ]

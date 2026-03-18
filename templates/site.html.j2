@@ -132,6 +132,9 @@
                 <p>
                   This keeps the itinerary-level choice inside the core guide. The direct option is now priced against multiple airlines instead of a single JAL anchor, and the Singapore option only makes sense if you actively want the stopover.
                 </p>
+                <p>
+                  In this section, the large fare totals are return fares per person unless a line explicitly says one-way or each way.
+                </p>
               </div>
               <div class="table-card flight-table-card">
                 <table class="flight-table">
@@ -157,8 +160,8 @@
                     <tr>
                       <td class="flight-item-label">Economy flight cost</td>
                       <td>
-                        <div class="flight-price">{{ row.flight_cost }} per person</div>
-                        <div class="flight-price flight-price-sub">{{ row.family_cost }} for 4 people</div>
+                        <div class="flight-price">{{ row.flight_cost }} return per person</div>
+                        <div class="flight-price flight-price-sub">{{ row.family_cost }} return for 4 people</div>
                         <div class="flight-breakdown-list">
                           {% for item in row.price_breakdown %}
                           <div class="flight-breakdown-item">{{ item }}</div>
