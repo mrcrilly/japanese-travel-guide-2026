@@ -230,7 +230,7 @@ tbody tr:last-child td {
 }
 
 .flight-table {
-  min-width: 860px;
+  min-width: 760px;
 }
 
 .flight-table th,
@@ -243,6 +243,10 @@ tbody tr:last-child td {
 }
 
 .flight-option-group + .flight-option-group tr:first-child td {
+  border-top: 18px solid transparent;
+}
+
+.flight-option-group + .flight-option-group tr:first-child th {
   border-top: 18px solid transparent;
 }
 
@@ -261,11 +265,15 @@ tbody tr:last-child td {
   font-size: 0.96rem;
 }
 
-.flight-option-name {
-  min-width: 180px;
+.flight-option-heading {
+  text-align: left;
+  font-family: "Fraunces", serif;
+  font-size: 1.15rem;
+  color: var(--ink);
+  background: rgba(182, 85, 47, 0.08);
 }
 
-.flight-table td:nth-child(2) {
+.flight-item-label {
   width: 190px;
   color: var(--muted);
   font-weight: 700;

@@ -121,7 +121,6 @@
             <table class="flight-table">
               <thead>
                 <tr>
-                  <th>Option</th>
                   <th>Item</th>
                   <th>Details</th>
                 </tr>
@@ -129,20 +128,20 @@
               {% for row in data.flight_options %}
               <tbody class="flight-option-group">
                 <tr>
-                  <td rowspan="5" class="flight-option-name">
-                    <strong>{{ row.name }}</strong>
-                  </td>
-                  <td>Flight pattern</td>
+                  <th colspan="2" class="flight-option-heading">{{ row.name }}</th>
+                </tr>
+                <tr>
+                  <td class="flight-item-label">Flight pattern</td>
                   <td>
                     <div class="flight-cell-main">{{ row.pattern }}</div>
                   </td>
                 </tr>
                 <tr>
-                  <td>Air time</td>
+                  <td class="flight-item-label">Air time</td>
                   <td><div class="flight-cell-main">{{ row.air_time }}</div></td>
                 </tr>
                 <tr>
-                  <td>Economy flight cost</td>
+                  <td class="flight-item-label">Economy flight cost</td>
                   <td>
                     <div class="flight-price">{{ row.flight_cost }} per person</div>
                     <div class="flight-price flight-price-sub">{{ row.family_cost }} for 4 people</div>
@@ -154,11 +153,11 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Japan time impact</td>
+                  <td class="flight-item-label">Japan time impact</td>
                   <td><div class="flight-cell-main">{{ row.japan_time }}</div></td>
                 </tr>
                 <tr>
-                  <td>Planning notes</td>
+                  <td class="flight-item-label">Planning notes</td>
                   <td>
                     <div class="flight-cell-main">{{ row.notes }}</div>
                     <div class="source-strip">
