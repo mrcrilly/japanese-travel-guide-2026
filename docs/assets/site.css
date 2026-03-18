@@ -230,7 +230,7 @@ tbody tr:last-child td {
 }
 
 .flight-table {
-  min-width: 1220px;
+  min-width: 860px;
 }
 
 .flight-table th,
@@ -238,41 +238,12 @@ tbody tr:last-child td {
   padding: 18px 16px;
 }
 
-.flight-table tbody tr + tr td {
-  border-top: 10px solid transparent;
-}
-
-.flight-table tbody tr {
+.flight-option-group tr {
   background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 236, 219, 0.52));
 }
 
-.flight-table td:first-child {
-  min-width: 150px;
-}
-
-.flight-table td:nth-child(2) {
-  min-width: 250px;
-}
-
-.flight-table td:nth-child(3) {
-  min-width: 210px;
-}
-
-.flight-table td:nth-child(4),
-.flight-table td:nth-child(6) {
-  min-width: 165px;
-}
-
-.flight-table td:nth-child(5) {
-  min-width: 250px;
-}
-
-.flight-table td:nth-child(7) {
-  min-width: 175px;
-}
-
-.flight-table td:nth-child(8) {
-  min-width: 360px;
+.flight-option-group + .flight-option-group tr:first-child td {
+  border-top: 18px solid transparent;
 }
 
 .flight-cell-main {
@@ -283,6 +254,25 @@ tbody tr:last-child td {
   font-weight: 800;
   color: var(--accent-deep);
   line-height: 1.45;
+}
+
+.flight-price-sub {
+  margin-top: 6px;
+  font-size: 0.96rem;
+}
+
+.flight-option-name {
+  min-width: 180px;
+}
+
+.flight-table td:nth-child(2) {
+  width: 190px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.flight-breakdown-list {
+  margin-top: 12px;
 }
 
 .flight-breakdown-item + .flight-breakdown-item {

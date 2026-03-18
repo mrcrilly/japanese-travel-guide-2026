@@ -122,41 +122,43 @@
               <thead>
                 <tr>
                   <th>Option</th>
-                  <th>Flight pattern</th>
-                  <th>Air time</th>
-                  <th>Economy flights</th>
-                  <th>Price breakdown</th>
-                  <th>Family of 4</th>
-                  <th>Japan time impact</th>
-                  <th>Notes</th>
+                  <th>Item</th>
+                  <th>Details</th>
                 </tr>
               </thead>
-              <tbody>
-                {% for row in data.flight_options %}
+              {% for row in data.flight_options %}
+              <tbody class="flight-option-group">
                 <tr>
-                  <td>
+                  <td rowspan="5" class="flight-option-name">
                     <strong>{{ row.name }}</strong>
                   </td>
+                  <td>Flight pattern</td>
                   <td>
                     <div class="flight-cell-main">{{ row.pattern }}</div>
                   </td>
+                </tr>
+                <tr>
+                  <td>Air time</td>
+                  <td><div class="flight-cell-main">{{ row.air_time }}</div></td>
+                </tr>
+                <tr>
+                  <td>Economy flight cost</td>
                   <td>
-                    <div class="flight-cell-main">{{ row.air_time }}</div>
+                    <div class="flight-price">{{ row.flight_cost }} per person</div>
+                    <div class="flight-price flight-price-sub">{{ row.family_cost }} for 4 people</div>
+                    <div class="flight-breakdown-list">
+                      {% for item in row.price_breakdown %}
+                      <div class="flight-breakdown-item">{{ item }}</div>
+                      {% endfor %}
+                    </div>
                   </td>
-                  <td>
-                    <div class="flight-price">{{ row.flight_cost }}</div>
-                  </td>
-                  <td>
-                    {% for item in row.price_breakdown %}
-                    <div class="flight-breakdown-item">{{ item }}</div>
-                    {% endfor %}
-                  </td>
-                  <td>
-                    <div class="flight-price">{{ row.family_cost }}</div>
-                  </td>
-                  <td>
-                    <div class="flight-cell-main">{{ row.japan_time }}</div>
-                  </td>
+                </tr>
+                <tr>
+                  <td>Japan time impact</td>
+                  <td><div class="flight-cell-main">{{ row.japan_time }}</div></td>
+                </tr>
+                <tr>
+                  <td>Planning notes</td>
                   <td>
                     <div class="flight-cell-main">{{ row.notes }}</div>
                     <div class="source-strip">
@@ -166,8 +168,8 @@
                     </div>
                   </td>
                 </tr>
-                {% endfor %}
               </tbody>
+              {% endfor %}
             </table>
           </div>
         </section>
