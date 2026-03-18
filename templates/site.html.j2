@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ data.meta.title }}</title>
+    <meta
+      name="description"
+      content="A hosted family travel guide for Japan covering Tokyo, Osaka, Hiroshima, Kanazawa, Takayama, and Nagano."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Family Guide | {{ data.meta.travel_window }}</p>
+          <h1>{{ data.meta.title }}</h1>
+          <p class="lede">{{ data.meta.subtitle }}</p>
+          <p class="summary">{{ data.meta.high_level_summary }}</p>
+          <div class="note">
+            <strong>Planning note:</strong> fares were checked online on {{ data.meta.source_checked_date }}. Some operator fare tables are older revision PDFs, so treat all transport costs as planning estimates, not locked fares.
+            <br />
+            <strong>FX note:</strong> AUD conversions use the AUD/JPY market close of {{ data.meta.fx.aud_jpy_close }} on {{ data.meta.fx.date }}. See {{ data.meta.fx.source_id }} in the citations list.
+          </div>
+        </div>
+        <div class="hero-stats">
+          {% for card in data.overview_cards %}
+          <article class="stat-card">
+            <p class="stat-label">{{ card.label }}</p>
+            <p class="stat-value">{{ card.value }}</p>
+            <p class="stat-detail">{{ card.detail }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </header>
+
+      <main>
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Route</p>
+            <h2>Main route map</h2>
+            <p>
+              This is the cleanest version of your route for a 20-night trip: four nights in Tokyo, four in Osaka, three in Hiroshima, then the Hokuriku/Hida/Nagano arc before a final Tokyo finish.
+            </p>
+          </div>
+          <div class="map-frame">
+            <div id="route-overview" class="map"></div>
+          </div>
+        </section>
+
+        <section class="section two-column">
+          <div>
+            <div class="section-head">
+              <p class="kicker">Pacing</p>
+              <h2>Itinerary at a glance</h2>
+            </div>
+            <div class="table-card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dates</th>
+                    <th>Base</th>
+                    <th>Nights</th>
+                    <th>Suggested rhythm</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for row in data.itinerary_rows %}
+                  <tr>
+                    <td>{{ row.dates }}</td>
+                    <td>{{ row.base }}</td>
+                    <td>{{ row.nights }}</td>
+                    <td>{{ row.rhythm }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div class="section-head">
+              <p class="kicker">Assumption</p>
+              <h2>How the 50/50 split works</h2>
+            </div>
+            <div class="callout">
+              <p>
+                Your short two-night stops are where a literal 50/50 split gets awkward, so this guide treats the
+                whole trip as the unit of balance instead of every single base.
+              </p>
+              <p>
+                Result: <strong>{{ data.meta.city_focus_days }} city-focus days</strong> and
+                <strong>{{ data.meta.excursion_days }} out-of-city days</strong>, with transfer days doing some of the work in Hokuriku and Hida.
+              </p>
+              <p>{{ data.meta.family_assumption }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Airport Access</p>
+            <h2>Getting to the airport and into Tokyo</h2>
+            <p>
+              The guide now includes the first and last practical legs around the flight itself: getting from Brisbane-side starting points to BNE, then getting from your Tokyo arrival airport into the city. These times are the right planning numbers to use around the bigger international travel day.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Route</th>
+                  <th>Best for</th>
+                  <th>Travel time</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data.airport_access %}
+                <tr>
+                  <td>{{ row.phase }}</td>
+                  <td>
+                    <strong>{{ row.route }}</strong>
+                    <div class="table-links">
+                      <a href="{{ row.maps_url }}">Map route</a>
+                    </div>
+                  </td>
+                  <td>{{ row.best_for }}</td>
+                  <td>{{ row.timing }}</td>
+                  <td>
+                    {{ row.notes }}
+                    <div class="source-strip">
+                      {% for source_id in row.source_ids %}
+                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section two-column">
+          <div>
+            <div class="section-head">
+              <p class="kicker">Trip Math</p>
+              <h2>How many days are you actually in Japan?</h2>
+            </div>
+            <div class="callout">
+              <p>{{ data.japan_time_math.assumption }}</p>
+              <p>{{ data.japan_time_math.outbound }}</p>
+              <p>{{ data.japan_time_math.return }}</p>
+              <p>
+                Result:
+                <strong>{{ data.japan_time_math.nights }} nights in Japan</strong>,
+                <strong>{{ data.japan_time_math.calendar_days }} calendar dates touched</strong>,
+                and <strong>{{ data.japan_time_math.full_days }} full sightseeing days between arrival and departure</strong>.
+              </p>
+              <div class="source-strip">
+                {% for source_id in data.japan_time_math.source_ids %}
+                <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="section-head">
+              <p class="kicker">Interpretation</p>
+              <h2>What that means for planning</h2>
+            </div>
+            <div class="callout">
+              <p>
+                Your earlier 20-night structure is still the right planning shape. The useful correction is that the trip gives you
+                <strong>19 full sightseeing days</strong>, not 20 or 21 fully usable days.
+              </p>
+              <p>
+                That is why the guide now pushes your higher-friction Tokyo wish-list items into the final Tokyo block instead of cramming them into the jet-lagged arrival stretch.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Must-Dos</p>
+            <h2>Your wife's requested additions</h2>
+            <p>
+              These are now placed into the route where they fit best, rather than left as a separate wish list. Where I had to choose between two valid options, I picked the cleaner fit for this exact itinerary and noted the alternate.
+            </p>
+          </div>
+          <div class="food-grid">
+            {% for item in data.requested_highlights %}
+            <article class="food-card">
+              <h3>{{ item.title }}</h3>
+              <p><strong>Best base:</strong> {{ item.base }}</p>
+              <p><strong>Best slot:</strong> {{ item.best_slot }}</p>
+              <p><strong>Budget note:</strong> {{ item.cost }}</p>
+              <p>{{ item.notes }}</p>
+              <div class="source-strip">
+                {% for source_id in item.source_ids %}
+                <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                {% endfor %}
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Transport</p>
+            <h2>Intercity cost estimate</h2>
+            <p>
+              These are one-way planning numbers between each base. The Hiroshima to Kanazawa segment is shown as a range because it now spans multiple operators and seat choices after the Hokuriku extension.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Route</th>
+                  <th>Mode</th>
+                  <th>Time</th>
+                  <th>Adult</th>
+                  <th>Family of 4</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data.intercity_segments %}
+                <tr>
+                  <td>
+                    <strong>{{ row.from }} → {{ row.to }}</strong>
+                    <div class="table-links">
+                      <a href="{{ row.maps_url }}">Map route</a>
+                    </div>
+                  </td>
+                  <td>{{ row.mode }}</td>
+                  <td>{{ row.duration }}</td>
+                  <td>{{ row.adult_cost_label }}</td>
+                  <td>{{ row.family_cost_label }}</td>
+                  <td>
+                    {{ row.notes }}
+                    <div class="source-strip">
+                      {% for source_id in row.source_ids %}
+                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Day Trips</p>
+            <h2>Base-to-excursion transport estimate</h2>
+            <p>
+              These are the day trips that best fit your route. For Kanazawa and Takayama especially, the cleanest move is to let one of the excursion ideas overlap with your transfer day rather than doing pure backtracking.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Base</th>
+                  <th>Day trip</th>
+                  <th>Adult</th>
+                  <th>Family of 4</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data.day_trip_rows %}
+                <tr>
+                  <td>{{ row.base }}</td>
+                  <td>{{ row.trip }}</td>
+                  <td>{{ row.adult_cost_label }}</td>
+                  <td>{{ row.family_cost_label }}</td>
+                  <td>
+                    {{ row.notes }}
+                    <div class="source-strip">
+                      {% for source_id in row.source_ids %}
+                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Food</p>
+            <h2>Expected daily food cost</h2>
+            <p>
+              These bands are inferred from JNTO’s national dining examples, then adjusted modestly for each stop’s tourist intensity and the kinds of meals families usually end up buying on travel days.
+            </p>
+          </div>
+          <div class="food-grid">
+            {% for item in data.food_budgets %}
+            <article class="food-card">
+              <h3>{{ item.location }}</h3>
+              <p><strong>Per person:</strong> {{ item.per_person_label }}</p>
+              <p><strong>Family of 4:</strong> {{ item.family_of_four_label }}</p>
+              <p><strong>Day-trip bump:</strong> {{ item.day_trip_add_on }}</p>
+              <p>{{ item.notes }}</p>
+              <div class="source-strip">
+                {% for source_id in item.source_ids %}
+                <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                {% endfor %}
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        {% for stay in data.stays %}
+        <section class="section stay-section" id="{{ stay.slug }}">
+          <div class="section-head">
+            <p class="kicker">{{ stay.region }}</p>
+            <h2>{{ stay.name }} | {{ stay.nights }} nights</h2>
+            <p>{{ stay.summary }}</p>
+            <p class="date-line">{{ stay.dates }}</p>
+          </div>
+
+          <div class="stay-layout">
+            <div class="stay-column">
+              <article class="panel">
+                <h3>If 50% of the time stays in the city</h3>
+                <ul class="bullet-list">
+                  {% for item in stay.city_focus %}
+                  <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              </article>
+
+              <article class="panel">
+                <h3>Food budget in {{ stay.name }}</h3>
+                <p><strong>Per person:</strong> {{ stay.food_budget.per_person_label }}</p>
+                <p><strong>Family of 4:</strong> {{ stay.food_budget.family_of_four_label }}</p>
+                <p>{{ stay.food_budget.notes }}</p>
+              </article>
+            </div>
+
+            <div class="stay-column">
+              <article class="panel">
+                <h3>If the other 50% goes outside the city</h3>
+                {% if stay.day_trips %}
+                <div class="trip-cards">
+                  {% for trip in stay.day_trips %}
+                  <div class="trip-card">
+                    <div class="trip-topline">
+                      <h4>{{ trip.name }}</h4>
+                      <span>{{ trip.duration }}</span>
+                    </div>
+                    <p>{{ trip.notes }}</p>
+                    <p><strong>Transport:</strong> {{ trip.transport }}</p>
+                    <p><strong>Adult estimate:</strong> {{ trip.adult_cost_label }}</p>
+                    <p><strong>Family of 4:</strong> {{ trip.family_cost_label }}</p>
+                    <p><a href="{{ trip.maps_url }}">Open route in Google Maps</a></p>
+                    <div class="source-strip">
+                      {% for source_id in trip.source_ids %}
+                      <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% else %}
+                <p>
+                  This return-Tokyo block works better as a buffer and catch-up stay than as another fixed day-trip base. That reduces weather risk and makes your last days materially easier.
+                </p>
+                {% endif %}
+              </article>
+
+              <article class="panel">
+                <h3>{{ stay.name }} map</h3>
+                <div id="map-{{ stay.slug }}" class="map small-map"></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="source-row">
+            <span>Sources for {{ stay.name }}:</span>
+            {% for source_id in stay.source_ids %}
+            <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+
+        <section class="section">
+          <div class="section-head">
+            <p class="kicker">Sources</p>
+            <h2>Citations</h2>
+            <p>
+              These are the sources used to shape the guide. Where a number is an estimate rather than a single posted operator fare, the note says so explicitly.
+            </p>
+          </div>
+          <div class="sources">
+            {% for citation in data.citations %}
+            <article class="source-card" id="{{ citation.id }}">
+              <p class="source-id">{{ citation.id }}</p>
+              <h3>{{ citation.title }}</h3>
+              <p>{{ citation.publisher }}</p>
+              <p><a href="{{ citation.url }}">{{ citation.url }}</a></p>
+              <p>Accessed {{ citation.accessed }}</p>
+              <p>{{ citation.note }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script>
+      const MAPS = {{ maps_json | safe }};
+
+      function buildMap(entry) {
+        const el = document.getElementById(entry.id);
+        if (!el) return;
+
+        const map = L.map(el, {
+          scrollWheelZoom: false,
+          zoomControl: true
+        });
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 18,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const latlngs = entry.points.map((point) => point.coord);
+        entry.points.forEach((point, index) => {
+          const marker = L.marker(point.coord).addTo(map);
+          marker.bindPopup(`<strong>${index + 1}. ${point.name}</strong>`);
+        });
+
+        if (latlngs.length > 1) {
+          L.polyline(latlngs, {
+            color: "#b6552f",
+            weight: 4,
+            opacity: 0.85
+          }).addTo(map);
+        }
+
+        const bounds = L.latLngBounds(latlngs);
+        if (latlngs.length === 1) {
+          map.setView(latlngs[0], 11);
+        } else {
+          map.fitBounds(bounds.pad(0.2));
+        }
+      }
+
+      MAPS.forEach(buildMap);
+    </script>
+  </body>
+</html>
