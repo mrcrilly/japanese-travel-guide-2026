@@ -117,8 +117,8 @@
               If you add two nights in Singapore on the way over and still come home direct from Tokyo to Brisbane, the flight-only cost does not obviously improve. The real tradeoff is time: you give up two Japan nights and two full Japan sightseeing days in exchange for the Singapore stop.
             </p>
           </div>
-          <div class="table-card">
-            <table>
+          <div class="table-card flight-table-card">
+            <table class="flight-table">
               <thead>
                 <tr>
                   <th>Option</th>
@@ -134,19 +134,31 @@
               <tbody>
                 {% for row in data.flight_options %}
                 <tr>
-                  <td><strong>{{ row.name }}</strong></td>
-                  <td>{{ row.pattern }}</td>
-                  <td>{{ row.air_time }}</td>
-                  <td>{{ row.flight_cost }}</td>
+                  <td>
+                    <strong>{{ row.name }}</strong>
+                  </td>
+                  <td>
+                    <div class="flight-cell-main">{{ row.pattern }}</div>
+                  </td>
+                  <td>
+                    <div class="flight-cell-main">{{ row.air_time }}</div>
+                  </td>
+                  <td>
+                    <div class="flight-price">{{ row.flight_cost }}</div>
+                  </td>
                   <td>
                     {% for item in row.price_breakdown %}
-                    <div>{{ item }}</div>
+                    <div class="flight-breakdown-item">{{ item }}</div>
                     {% endfor %}
                   </td>
-                  <td>{{ row.family_cost }}</td>
-                  <td>{{ row.japan_time }}</td>
                   <td>
-                    {{ row.notes }}
+                    <div class="flight-price">{{ row.family_cost }}</div>
+                  </td>
+                  <td>
+                    <div class="flight-cell-main">{{ row.japan_time }}</div>
+                  </td>
+                  <td>
+                    <div class="flight-cell-main">{{ row.notes }}</div>
                     <div class="source-strip">
                       {% for source_id in row.source_ids %}
                       <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
