@@ -130,7 +130,7 @@
                 <p class="kicker">Flight Options</p>
                 <h2>Direct Japan vs a 2-night Singapore stop</h2>
                 <p>
-                  This keeps the main flight comparison inside the core guide. The Singapore option only makes sense if you actively want the stopover, because it gives away Japan time without producing a clearly better flight-only cost.
+                  This keeps the itinerary-level choice inside the core guide. The direct option is now priced against multiple airlines instead of a single JAL anchor, and the Singapore option only makes sense if you actively want the stopover.
                 </p>
               </div>
               <div class="table-card flight-table-card">
@@ -174,6 +174,64 @@
                       <td class="flight-item-label">Planning notes</td>
                       <td>
                         <div class="flight-cell-main">{{ row.notes }}</div>
+                        <div class="source-strip">
+                          {% for source_id in row.source_ids %}
+                          <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
+                          {% endfor %}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <p class="kicker">Airline Check</p>
+                <h2>Current price anchors by airline</h2>
+                <p>
+                  These are the current fare anchors I could verify across Jetstar, Qantas, Japan Airlines, Philippine Airlines, Cathay Pacific, and Singapore Airlines. Per-direction numbers are planning splits of the current round-trip fares, so use them as budgeting math rather than quoted one-way tickets.
+                </p>
+              </div>
+              <div class="table-card">
+                <table class="sheet-table">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  {% for row in data.flight_market_rows %}
+                  <tbody class="sheet-group">
+                    <tr>
+                      <th colspan="2" class="sheet-group-heading">{{ row.name }}</th>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Routing</td>
+                      <td class="sheet-value">{{ row.pattern }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Round-trip per person</td>
+                      <td class="sheet-value">{{ row.round_trip }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Approx outbound</td>
+                      <td class="sheet-value">{{ row.outbound }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Approx return</td>
+                      <td class="sheet-value">{{ row.return_leg }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Family of 4</td>
+                      <td class="sheet-value">{{ row.family_cost }}</td>
+                    </tr>
+                    <tr>
+                      <td class="sheet-label">Notes</td>
+                      <td>
+                        {{ row.notes }}
                         <div class="source-strip">
                           {% for source_id in row.source_ids %}
                           <a href="{{ data.citations_by_id[source_id].url }}">{{ source_id }}</a>
@@ -584,6 +642,13 @@
                       <td class="sheet-label">Notes</td>
                       <td>
                         {{ row.notes }}
+                        {% if row.details %}
+                        <div class="flight-breakdown-list">
+                          {% for item in row.details %}
+                          <div class="flight-breakdown-item">{{ item }}</div>
+                          {% endfor %}
+                        </div>
+                        {% endif %}
                         {% if row.source_ids %}
                         <div class="source-strip">
                           {% for source_id in row.source_ids %}
@@ -638,6 +703,13 @@
                       <td class="sheet-label">Notes</td>
                       <td>
                         {{ row.notes }}
+                        {% if row.details %}
+                        <div class="flight-breakdown-list">
+                          {% for item in row.details %}
+                          <div class="flight-breakdown-item">{{ item }}</div>
+                          {% endfor %}
+                        </div>
+                        {% endif %}
                         {% if row.source_ids %}
                         <div class="source-strip">
                           {% for source_id in row.source_ids %}

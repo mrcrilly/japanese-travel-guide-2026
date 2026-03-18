@@ -1,0 +1,93 @@
+{
+  "source_checked_date": "March 19, 2026",
+  "fx": {
+    "aud_jpy_date": "2026-03-12",
+    "aud_jpy_close": 113.46,
+    "sgd_aud_date": "2026-03-12",
+    "sgd_to_aud": 1.1
+  },
+  "flights": {
+    "airlines": {
+      "jetstar": {
+        "round_trip_aud": [730, 800],
+        "per_direction_aud": [365, 400]
+      },
+      "qantas": {
+        "round_trip_aud": [1374, 1603],
+        "per_direction_aud": [687, 802]
+      },
+      "jal": {
+        "round_trip_aud": [1699, 1784],
+        "per_direction_aud": [850, 892]
+      },
+      "philippine": {
+        "round_trip_aud": 914,
+        "per_direction_aud": 457
+      },
+      "cathay": {
+        "round_trip_aud": 1130,
+        "per_direction_aud": 565
+      },
+      "singapore": {
+        "round_trip_aud": 1639,
+        "per_direction_aud": 820
+      }
+    },
+    "stopover": {
+      "brisbane_to_singapore_aud": [400, 450],
+      "singapore_to_tokyo_sgd": [352, 450],
+      "tokyo_to_brisbane_direct_aud": [850, 950]
+    }
+  },
+  "transport": {
+    "intercity_segments": {
+      "tokyo_osaka": 14520,
+      "osaka_hiroshima": 10750,
+      "hiroshima_kanazawa": [16190, 23470],
+      "kanazawa_takayama": 4200,
+      "takayama_nagano": 6720,
+      "nagano_tokyo": 7680
+    },
+    "day_trips": {
+      "tokyo_nikko": 8000,
+      "tokyo_hakone": 7100,
+      "osaka_kyoto": 1900,
+      "osaka_nara": 1900,
+      "hiroshima_miyajima": 1300,
+      "kanazawa_shirakawago": 5600,
+      "takayama_hida_furukawa": [540, 720],
+      "nagano_snow_monkey_park": [3960, 4000]
+    }
+  },
+  "food": {
+    "tokyo": {
+      "per_person_jpy": [3500, 6000],
+      "day_trip_add_on_jpy": [500, 1000]
+    },
+    "osaka": {
+      "per_person_jpy": [3200, 5500],
+      "day_trip_add_on_jpy": 500
+    },
+    "hiroshima": {
+      "per_person_jpy": [3200, 5200],
+      "day_trip_add_on_jpy": 500
+    },
+    "kanazawa": {
+      "per_person_jpy": [3500, 6000],
+      "day_trip_add_on_jpy": 500
+    },
+    "takayama": {
+      "per_person_jpy": [3500, 6500],
+      "day_trip_add_on_jpy": [300, 700]
+    },
+    "nagano": {
+      "per_person_jpy": [3000, 5200],
+      "day_trip_add_on_jpy": 500
+    }
+  },
+  "activities": {
+    "yayoi_kusama_adult_jpy": 1100,
+    "cupnoodles_factory_jpy": 500,
+    "hungry_osaka_food_tour_jpy": 13000
+  }
+}

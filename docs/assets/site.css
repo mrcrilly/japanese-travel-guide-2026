@@ -491,7 +491,8 @@ tbody tr:last-child td {
   }
 
   .table-card {
-    overflow-x: auto;
+    overflow-x: visible;
+    padding: 8px;
   }
 
   .tab-nav {
@@ -506,5 +507,83 @@ tbody tr:last-child td {
 
   .map {
     height: 300px;
+  }
+
+  .sheet-table,
+  .flight-table {
+    min-width: 0;
+  }
+
+  .sheet-table thead,
+  .flight-table thead {
+    display: none;
+  }
+
+  .sheet-table,
+  .sheet-table tbody,
+  .sheet-table tr,
+  .sheet-table th,
+  .sheet-table td,
+  .flight-table,
+  .flight-table tbody,
+  .flight-table tr,
+  .flight-table th,
+  .flight-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .sheet-group,
+  .flight-option-group {
+    display: block;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(248, 236, 219, 0.72));
+  }
+
+  .sheet-group + .sheet-group tr:first-child th,
+  .sheet-group + .sheet-group tr:first-child td,
+  .flight-option-group + .flight-option-group tr:first-child th,
+  .flight-option-group + .flight-option-group tr:first-child td {
+    border-top: 0;
+  }
+
+  .sheet-group tr,
+  .flight-option-group tr {
+    background: transparent;
+  }
+
+  .sheet-group-heading,
+  .flight-option-heading {
+    padding: 16px 14px;
+  }
+
+  .sheet-label,
+  .flight-item-label {
+    width: auto;
+    padding: 12px 14px 4px;
+    border-bottom: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sheet-table td:not(.sheet-label),
+  .flight-table td:not(.flight-item-label) {
+    padding: 0 14px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sheet-group tr:last-child td:last-child,
+  .flight-option-group tr:last-child td:last-child {
+    border-bottom: 0;
+  }
+
+  .flight-table th,
+  .flight-table td {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
