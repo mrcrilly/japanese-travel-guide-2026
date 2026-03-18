@@ -592,21 +592,6 @@ def build_data() -> dict:
         },
     ]
 
-    worst_case_flight_cards = [
-        {
-            "title": "Direct worst case",
-            "per_person": "AUD 1,850",
-            "family": "AUD 7,400",
-            "notes": "Assumes the upper end of the current direct-economy planning range for Brisbane ↔ Tokyo.",
-        },
-        {
-            "title": "Via Singapore worst case",
-            "per_person": "AUD 1,850",
-            "family": "AUD 7,400",
-            "notes": "Assumes upper-end flight-only pricing for Brisbane → Singapore → Tokyo outbound plus direct Tokyo → Brisbane return. This excludes the extra Singapore hotel and food cost.",
-        },
-    ]
-
     requested_highlights = [
         {
             "title": "Boutique stay near Yoyogi-Koen",
@@ -991,6 +976,277 @@ def build_data() -> dict:
             }
         )
 
+    dates_and_times_rows = [
+        {
+            "scenario": "Direct plan",
+            "date_window": "Tue Oct 28, 2026",
+            "place": "Brisbane → Tokyo direct flight",
+            "time_detail": "about 8h 55m-9h 10m",
+            "notes": "Used for the main trip math assumption. Japan remains the same calendar arrival date under this planning scenario.",
+            "source_ids": ["S29"],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Oct 28-Nov 1, 2026",
+            "place": "Tokyo first stay",
+            "time_detail": "4 nights",
+            "notes": "Landing block. Keep it lighter than the final Tokyo stay.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 1-Nov 5, 2026",
+            "place": "Osaka stay",
+            "time_detail": "4 nights",
+            "notes": "Best fit for Cup Noodles Ikeda and the Hungry Osaka tour.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Nov 2 or Nov 4, 2026",
+            "place": "Cup Noodles Museum Osaka Ikeda",
+            "time_detail": "9:30-16:30; last admission 15:30",
+            "notes": "Closed Tuesdays. About 20 minutes from Hankyu Osaka-Umeda to Ikeda Station, then about 5 minutes on foot.",
+            "source_ids": ["S37"],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Nov 2 or Nov 3, 2026",
+            "place": "Hungry Osaka food tour",
+            "time_detail": "midday or early evening; 3-3.5 hours",
+            "notes": "Meeting point is outside Ebisucho Station Exit 3.",
+            "source_ids": ["S36"],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 5-Nov 8, 2026",
+            "place": "Hiroshima stay",
+            "time_detail": "3 nights",
+            "notes": "City day plus Miyajima day works cleanly here.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 8-Nov 10, 2026",
+            "place": "Kanazawa stay",
+            "time_detail": "2 nights",
+            "notes": "Compact stop; easiest if you keep the sightseeing core tight.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 10-Nov 12, 2026",
+            "place": "Takayama stay",
+            "time_detail": "2 nights",
+            "notes": "Old-town block plus light regional side trip.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 12-Nov 14, 2026",
+            "place": "Nagano stay",
+            "time_detail": "2 nights",
+            "notes": "Zenkoji plus Snow Monkey day fit here.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Main itinerary",
+            "date_window": "Nov 14-Nov 17, 2026",
+            "place": "Final Tokyo / Yoyogi-Tomigaya stay",
+            "time_detail": "3 nights",
+            "notes": "Best place to anchor the boutique-hotel request and the wife's Tokyo list.",
+            "source_ids": ["S31", "S39"],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Sat Nov 14, 2026",
+            "place": "Yayoi Kusama Museum",
+            "time_detail": "11:00-17:30; timed 90-minute entry slots",
+            "notes": "Open Thursdays to Sundays and national holidays only. Tickets are advance purchase only.",
+            "source_ids": ["S32"],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Sun Nov 15, 2026",
+            "place": "Oedo Antique Market",
+            "time_detail": "9:00-16:00",
+            "notes": "Tokyo International Forum market; canceled in rain. Your trip also touches Sunday Nov 1, but Nov 15 fits the final Tokyo stay better.",
+            "source_ids": ["S34", "S40"],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Sat Nov 14 or Mon Nov 16, 2026",
+            "place": "Nippori Fabric Town",
+            "time_detail": "shop hours vary by store",
+            "notes": "Best treated as a half-day shopping block rather than a fixed-ticket activity.",
+            "source_ids": ["S35"],
+        },
+        {
+            "scenario": "Requested place",
+            "date_window": "Mon Nov 16, 2026",
+            "place": "Koedo Kawagoe day trip",
+            "time_detail": "about 30 minutes from central Tokyo; allow most of the day",
+            "notes": "Best slot for the Little Edo request in the final Tokyo block.",
+            "source_ids": ["S33"],
+        },
+        {
+            "scenario": "Singapore variant",
+            "date_window": "Tue Oct 28, 2026",
+            "place": "Brisbane → Singapore flight",
+            "time_detail": "about 7h 40m-8h 00m",
+            "notes": "Outbound variant if you choose the stopover plan.",
+            "source_ids": ["S46"],
+        },
+        {
+            "scenario": "Singapore variant",
+            "date_window": "Oct 28-Oct 30, 2026",
+            "place": "Singapore stopover",
+            "time_detail": "2 nights",
+            "notes": "This variant reduces Japan time to 18 nights and 17 full sightseeing days.",
+            "source_ids": [],
+        },
+        {
+            "scenario": "Singapore variant",
+            "date_window": "Thu Oct 30, 2026",
+            "place": "Singapore → Tokyo flight",
+            "time_detail": "about 6h 30m-6h 35m",
+            "notes": "Use this if you commit to the Singapore stopover route.",
+            "source_ids": ["S47"],
+        },
+        {
+            "scenario": "Direct plan",
+            "date_window": "Tue Nov 17, 2026",
+            "place": "Tokyo → Brisbane direct flight",
+            "time_detail": "about 8h 50m-9h 05m",
+            "notes": "Planning assumption lands back in Brisbane on Wednesday Nov 18, 2026.",
+            "source_ids": ["S30"],
+        },
+    ]
+
+    finance_rows = [
+        {
+            "category": "Flights",
+            "item": "Direct Brisbane ↔ Tokyo economy",
+            "per_person": aud_amount((1700, 1850)),
+            "family": aud_amount((6800, 7400)),
+            "notes": "Round-trip planning estimate from current fare pages and schedules.",
+            "source_ids": ["S29", "S30", "S41", "S42"],
+        },
+        {
+            "category": "Flights",
+            "item": "Brisbane → Singapore → Tokyo, then Tokyo → Brisbane economy",
+            "per_person": aud_amount((1650, 1850)),
+            "family": aud_amount((6600, 7400)),
+            "notes": "Flight-only estimate. Excludes the added Singapore hotel and food cost.",
+            "source_ids": ["S30", "S43", "S44", "S45", "S46", "S47"],
+        },
+        {
+            "category": "Flight leg",
+            "item": "Brisbane → Tokyo direct",
+            "per_person": aud_amount((850, 925)),
+            "family": aud_amount((3400, 3700)),
+            "notes": "Used in the direct-option breakdown.",
+            "source_ids": ["S29", "S41"],
+        },
+        {
+            "category": "Flight leg",
+            "item": "Tokyo → Brisbane direct",
+            "per_person": aud_amount((850, 950)),
+            "family": aud_amount((3400, 3800)),
+            "notes": "Return-leg planning range used across both flight scenarios.",
+            "source_ids": ["S30", "S42"],
+        },
+        {
+            "category": "Flight leg",
+            "item": "Brisbane → Singapore",
+            "per_person": aud_amount((400, 450)),
+            "family": aud_amount((1600, 1800)),
+            "notes": "One-way stopover-leg estimate.",
+            "source_ids": ["S43", "S46"],
+        },
+        {
+            "category": "Flight leg",
+            "item": "Singapore → Tokyo",
+            "per_person": sgd_to_aud((352, 450)),
+            "family": aud_amount((352 * SGD_TO_AUD * 4, 450 * SGD_TO_AUD * 4)),
+            "notes": f"Converted from Singapore-dollar pricing using S$1 = AUD {SGD_TO_AUD:.2f}.",
+            "source_ids": ["S44", "S45", "S47"],
+        },
+    ]
+
+    for segment in intercity_segments:
+        finance_rows.append(
+            {
+                "category": "Intercity transport",
+                "item": f"{segment['from']} → {segment['to']}",
+                "per_person": segment["adult_cost_label"],
+                "family": segment["family_cost_label"],
+                "notes": f"{segment['mode']}; {segment['duration']}.",
+                "source_ids": segment["source_ids"],
+            }
+        )
+
+    for row in day_trip_rows:
+        finance_rows.append(
+            {
+                "category": "Day-trip transport",
+                "item": f"{row['base']} → {row['trip']}",
+                "per_person": row["adult_cost_label"],
+                "family": row["family_cost_label"],
+                "notes": row["notes"],
+                "source_ids": row["source_ids"],
+            }
+        )
+
+    for food in food_budgets:
+        finance_rows.append(
+            {
+                "category": "Daily food",
+                "item": f"{food['location']} per day",
+                "per_person": food["per_person_label"],
+                "family": food["family_of_four_label"],
+                "notes": food["day_trip_add_on"],
+                "source_ids": food["source_ids"],
+            }
+        )
+
+    finance_rows.extend(
+        [
+            {
+                "category": "Activity",
+                "item": "Yayoi Kusama Museum",
+                "per_person": money(1100),
+                "family": money(family_cost(1100)),
+                "notes": "Adult price. Children 6-18 are cheaper; under 6 free.",
+                "source_ids": ["S32"],
+            },
+            {
+                "category": "Activity",
+                "item": "Cup Noodles Museum Osaka Ikeda",
+                "per_person": f"Entry free; My CUPNOODLES Factory {money(500)}",
+                "family": f"Entry free; My CUPNOODLES Factory {money(family_cost(500))}",
+                "notes": "Museum entry is free; attraction cost is for the custom cup activity.",
+                "source_ids": ["S37"],
+            },
+            {
+                "category": "Activity",
+                "item": "Hungry Osaka food tour",
+                "per_person": money(13000),
+                "family": money(family_cost(13000)),
+                "notes": "Small-group Shinsekai food tour.",
+                "source_ids": ["S36"],
+            },
+            {
+                "category": "Activity",
+                "item": "Oedo Antique Market",
+                "per_person": "Free",
+                "family": "Free",
+                "notes": "No ticket cost, but shopping spend varies.",
+                "source_ids": ["S34", "S40"],
+            },
+        ]
+    )
+
     return {
         "meta": {
             "title": "Japan Family Trip Guide",
@@ -1032,7 +1288,8 @@ def build_data() -> dict:
         ],
         "japan_time_math": japan_time_math,
         "flight_options": flight_options,
-        "worst_case_flight_cards": worst_case_flight_cards,
+        "dates_and_times_rows": dates_and_times_rows,
+        "finance_rows": finance_rows,
         "requested_highlights": requested_highlights,
         "itinerary_rows": [
             {"dates": "Oct 28-Nov 1", "base": "Tokyo", "nights": 4, "rhythm": "Big-city landing, keep this block light, save Kusama/Oedo/Koedo for final Tokyo"},

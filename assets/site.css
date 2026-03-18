@@ -165,6 +165,54 @@ table,
   border-radius: 28px;
 }
 
+.tab-shell {
+  margin-top: 28px;
+}
+
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 0 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab-button {
+  appearance: none;
+  border: 1px solid rgba(29, 43, 49, 0.12);
+  border-bottom: 0;
+  background: rgba(244, 235, 222, 0.92);
+  color: var(--muted);
+  border-radius: 18px 18px 0 0;
+  padding: 13px 18px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  position: relative;
+  top: 1px;
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(182, 85, 47, 0.28);
+}
+
+.tab-button.is-active {
+  background: rgba(255, 250, 242, 0.98);
+  color: var(--ink);
+  border-color: rgba(29, 43, 49, 0.12);
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+.tab-panel.is-active {
+  display: block;
+}
+
 .section-head {
   max-width: 76ch;
   margin-bottom: 20px;
@@ -227,6 +275,37 @@ tbody tr:last-child td {
 
 .table-links {
   margin-top: 6px;
+}
+
+.sheet-table {
+  min-width: 640px;
+}
+
+.sheet-group tr {
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 236, 219, 0.52));
+}
+
+.sheet-group + .sheet-group tr:first-child th,
+.sheet-group + .sheet-group tr:first-child td {
+  border-top: 18px solid transparent;
+}
+
+.sheet-group-heading {
+  text-align: left;
+  font-family: "Fraunces", serif;
+  font-size: 1.12rem;
+  color: var(--ink);
+  background: rgba(49, 89, 78, 0.08);
+}
+
+.sheet-label {
+  width: 210px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.sheet-value {
+  line-height: 1.6;
 }
 
 .flight-table {
@@ -386,6 +465,15 @@ tbody tr:last-child td {
 
   .table-card {
     overflow-x: auto;
+  }
+
+  .tab-nav {
+    gap: 8px;
+  }
+
+  .tab-button {
+    width: 100%;
+    justify-content: center;
   }
 
   .map {
