@@ -167,7 +167,19 @@
                     </tr>
                     <tr>
                       <td class="flight-item-label">Air time</td>
-                      <td><div class="flight-cell-main">{{ row.air_time }}</div></td>
+                      <td>
+                        <div class="flight-cell-main">
+                          {% if row.air_time_steps %}
+                          <ol class="route-list">
+                            {% for item in row.air_time_steps %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                          </ol>
+                          {% else %}
+                          {{ row.air_time }}
+                          {% endif %}
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td class="flight-item-label">Economy flight cost</td>

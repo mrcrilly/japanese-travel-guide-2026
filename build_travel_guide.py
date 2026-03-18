@@ -711,7 +711,10 @@ def build_data() -> dict:
                 "Brisbane → Tokyo direct",
                 "Tokyo → Brisbane direct",
             ],
-            "air_time": "about 8h 55m-9h 10m outbound and 8h 50m-9h 05m inbound",
+            "air_time_steps": [
+                "Outbound: about 8h 55m-9h 10m",
+                "Return: about 8h 50m-9h 05m",
+            ],
             "flight_cost": aud_amount(direct_round_trip_aud),
             "family_cost": aud_amount(family_cost(direct_round_trip_aud)),
             "price_breakdown": [
@@ -731,7 +734,11 @@ def build_data() -> dict:
                 "Singapore → Tokyo",
                 "Tokyo → Brisbane direct",
             ],
-            "air_time": "about 7h 40m-8h 00m to Singapore, 6h 30m-6h 35m to Tokyo, then 8h 50m-9h 05m home",
+            "air_time_steps": [
+                "Brisbane → Singapore: about 7h 40m-8h 00m",
+                "Singapore → Tokyo: about 6h 30m-6h 35m",
+                "Tokyo → Brisbane: about 8h 50m-9h 05m",
+            ],
             "flight_cost": aud_amount(singapore_stopover_round_trip_aud),
             "family_cost": aud_amount(family_cost(singapore_stopover_round_trip_aud)),
             "price_breakdown": [
